@@ -71,7 +71,7 @@ img {
 
 .bio {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 30px;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
@@ -107,12 +107,8 @@ img {
   width: 100%;
 }
 
-.a {
-
-}
-
-.c {
-
+.link {
+  font-size: 22px;
 }
 
 .time {
