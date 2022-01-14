@@ -76,11 +76,9 @@ img {
 }
 
 .bio {
-  color: #ffffff;
+  color: #000000;
   font-size: 30px;
   font-family: 'IBM Plex Sans', sans-serif;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
 }
 
 /* Added a button and a box for that button. The "flex" makes it easier to center the button. If you don't want the button centered, you could remove it */
@@ -170,9 +168,7 @@ footer div {
   display: flex;
   align-content: center;
   padding: 10px 20px;
-  color:rgba(255, 255, 255, 1);
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
+  color:rgba(0, 0, 0, 1);
 }
 
 @media all and (max-width:700px) {
