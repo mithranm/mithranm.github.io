@@ -3,6 +3,21 @@
     <head>
         <meta charset="utf-8">
         <title>Yugioh</title>
-        <h2>Work in progress!</h2>
+
+        <script defer src="uploadFile.js"></script>
+        <script defer src="displayData.js"></script>
+
+        <h2>Step 1: Make a .ydk (a text file with yugioh card ids).</h2>
+        <p style="font-size: 20px; color:#1fd1fe;">
+            <a href="https://www.duelingbook.com/">You can use duelingbook.com OR make your own in notepad. |</a>
+            <a href="https://ygoprodeck.com/deck/hero-deck-june-2022-289005#/">Sample .ydk download (go to this page and click More...)</a>
+        
+        </p>
+        <h2>Step 2: Upload it here</h2>
+        <!-- This is where the whole app needs to go-->
+        <input id="fileupload" type="file" name="fileupload" />
+        <button id="upload-button" onclick="uploadFile()"> Upload </button>
+        <h2>PriceBreakdown:</h2>
+
     </head>
 </html>
