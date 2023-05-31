@@ -94,13 +94,15 @@ img {
   margin: 1.69em auto;
 }
 
+/*Makes the button orange when you hover over it*/
 .myButton:hover {
 	background-color:#e69708;
 }
 
+/*Moves the button down*/
 .myButton:active {
 	position:relative;
-	top:1px;
+	top:10px;
 }
 
 .projects {
@@ -114,20 +116,13 @@ img {
 }
 
 .project img {
-  height: 400px;
+  height: 50vh;
   width: 50vw;
 }
 
 .linkToGithub {
   font-size: 22px;
   font-family: "IBM Plex Sans";
-}
-
-.time {
-  padding-left: 10px;
-  padding-top: 10px;
-  width: 20px;
-  height: auto;
 }
 
 .mins {
