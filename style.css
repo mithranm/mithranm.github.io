@@ -21,23 +21,17 @@ header {
   display: flex;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr) ) ;
-  grid-gap: 20px;
-  margin-top: 44px;
-
-  justify-items: center;
-  justify-content: center;
-  align-items: stretch;
-  align-content: center;
+/* Added wrapper class, set some spacing. Remember, margin sets space outside of the box, while padding sets the space inside the box */
+.wrapper {
+  margin: auto;
+  padding: 50px;
+  display: block;
 }
 
 a, u {
   text-decoration: none;
 }
 
-/* Added h1 definition. Notice the font size calculation. This calc sets the font size at AT LEAST 1.93em, then adds 2% of the view width per character (approx.) */
 h1 {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: calc(1em + 3vw);
@@ -46,34 +40,19 @@ h1 {
   line-height: 1.3;
 }
 
-h2 {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-align: left;
-  color: #ffa500;
-  padding: 10px 0px 10px 10px;
-}
-
-img {
-  width: 100%;
-  height: 50vh;
-  object-fit: cover;
-}
-
-/* Added wrapper class, set some spacing. Remember, margin sets space outside of the box, while padding sets the space inside the box */
-.wrapper {
-    max-width: 1150px;
-    margin: auto;
-    padding: 50px;
-    display: block;
+.name {
+  font-size:calc(100% + 4vw);
 }
 
 .bio {
-  color: #000000;
-  font-size: 30px;
-  font-family: 'IBM Plex Sans', sans-serif;
+color: #000000;
+font-size: 30px;
+font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.linkToGithub {
+  font-size: 22px;
+  font-family: "IBM Plex Sans";
 }
 
 /* Added a button and a box for that button. The "flex" makes it easier to center the button. If you don't want the button centered, you could remove it */
@@ -81,7 +60,7 @@ img {
   display: flex;
   justify-content: center;
   align-content: center;
-}
+  }
 
 .myButton {
   border-radius: 28px;
@@ -105,9 +84,27 @@ img {
 	top:10px;
 }
 
-.projects {
-  display: flex;
-  flex-wrap: wrap;
+#projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr) ) ;
+  grid-gap: 20px;
+  margin-top: 44px;
+
+  justify-items: center;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center;
+}
+
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #ffa500;
+  padding: 10px 0px 10px 10px;
 }
 
 .project {
@@ -118,23 +115,25 @@ img {
 .project img {
   height: 50vh;
   width: 50vw;
+  object-fit: contain;
 }
 
-.linkToGithub {
-  font-size: 22px;
-  font-family: "IBM Plex Sans";
+@media all and (max-width:700px) {
+  #projects {
+    grid-template-columns: 1fr;
+  }
+  .project img {
+    width: 100vw;
+  }
 }
 
-.mins {
-  display: inline-block;
-  font-family: Barlow;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  text-align: left;
-  color: #4a4a4a;
-  position: relative;
-  bottom: 5px;
+@media (resolution: 326dpi) and (device-width: 640) and (device-height: 960){
+  #projects {
+    grid-template-columns: 1fr;
+  }
+  .project img {
+    width: 100vw;
+  }
 }
 
 .description {
@@ -156,12 +155,6 @@ img {
   padding: 20px;
 }
 
-/* Removed min-width because some mobile screens are smaller than 500px */
-.container {
-/*  min-width: 500px; */
-  margin: auto;
-}
-
 footer div {
   height: 100%;
   font-family: 'IBM Plex Sans', sans-serif;
@@ -170,13 +163,4 @@ footer div {
   align-content: center;
   padding: 10px 20px;
   color:rgba(0, 0, 0, 1);
-}
-
-@media all and (max-width:700px) {
-  main {
-    grid-template-columns: 1fr;
-  }
-  img {
-    height: 40vh;
-  }
 }
