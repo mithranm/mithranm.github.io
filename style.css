@@ -1,3 +1,7 @@
+/* Pick 4 colors for the learning path
+*/
+
+
 /* Set the scroll behavior to smooth so that when you click the in the header, the screen scrolls down rather than jumps */
 html {
   scroll-behavior: smooth;
@@ -33,7 +37,7 @@ a, u {
 }
 
 h1 {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Abril Fatface', sans-serif;
   font-size: calc(1em + 3vw);
   padding-bottom: .67em;
   border-bottom: 1px solid;
@@ -47,12 +51,13 @@ h1 {
 .bio {
 color: #000000;
 font-size: 30px;
-font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'Abril Fatface', sans-serif;
 }
 
 .linkToGithub {
   font-size: 22px;
   font-family: "IBM Plex Sans";
+  color: #ffa500;
 }
 
 /* Added a button and a box for that button. The "flex" makes it easier to center the button. If you don't want the button centered, you could remove it */
@@ -64,9 +69,9 @@ font-family: 'IBM Plex Sans', sans-serif;
 
 .myButton {
   border-radius: 28px;
-  border: 1px solid #ffffff;
+  border: 1px solid #ffa600;
   cursor: pointer;
-  color: #ffffff;
+  color: #ffa600;
   font-size: 20px;
   padding: 16px 31px;
   text-decoration: none;
