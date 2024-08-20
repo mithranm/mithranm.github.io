@@ -2,14 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0;url=/mithranm.github.io/" />
+    <title>Page Not Found</title>
     <script>
-      // This script redirects to the homepage for all non-matching paths
-      window.location.replace("/mithranm.github.io/");
+      // Redirect to the homepage, maintaining the hash if present
+      var segmentCount = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
     </script>
   </head>
   <body>
-    Redirecting...
+    Redirecting to homepage...
   </body>
 </html>

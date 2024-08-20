@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mithranm.github.io/static/css/main.94af4fa8.css",
-    "main.js": "/mithranm.github.io/static/js/main.8557e5d8.js",
-    "static/js/453.acca0757.chunk.js": "/mithranm.github.io/static/js/453.acca0757.chunk.js",
-    "index.html": "/mithranm.github.io/index.html",
-    "main.94af4fa8.css.map": "/mithranm.github.io/static/css/main.94af4fa8.css.map",
-    "main.8557e5d8.js.map": "/mithranm.github.io/static/js/main.8557e5d8.js.map",
-    "453.acca0757.chunk.js.map": "/mithranm.github.io/static/js/453.acca0757.chunk.js.map"
+    "main.css": "/static/css/main.94af4fa8.css",
+    "main.js": "/static/js/main.b5ccf9b7.js",
+    "static/js/453.acca0757.chunk.js": "/static/js/453.acca0757.chunk.js",
+    "index.html": "/index.html",
+    "main.94af4fa8.css.map": "/static/css/main.94af4fa8.css.map",
+    "main.b5ccf9b7.js.map": "/static/js/main.b5ccf9b7.js.map",
+    "453.acca0757.chunk.js.map": "/static/js/453.acca0757.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.94af4fa8.css",
-    "static/js/main.8557e5d8.js"
+    "static/js/main.b5ccf9b7.js"
   ]
 }
