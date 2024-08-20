@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mithranm.github.io/static/css/main.94af4fa8.css",
-    "main.js": "/mithranm.github.io/static/js/main.6d1030d1.js",
-    "static/js/453.6432168e.chunk.js": "/mithranm.github.io/static/js/453.6432168e.chunk.js",
+    "main.js": "/mithranm.github.io/static/js/main.8557e5d8.js",
+    "static/js/453.acca0757.chunk.js": "/mithranm.github.io/static/js/453.acca0757.chunk.js",
     "index.html": "/mithranm.github.io/index.html",
     "main.94af4fa8.css.map": "/mithranm.github.io/static/css/main.94af4fa8.css.map",
-    "main.6d1030d1.js.map": "/mithranm.github.io/static/js/main.6d1030d1.js.map",
-    "453.6432168e.chunk.js.map": "/mithranm.github.io/static/js/453.6432168e.chunk.js.map"
+    "main.8557e5d8.js.map": "/mithranm.github.io/static/js/main.8557e5d8.js.map",
+    "453.acca0757.chunk.js.map": "/mithranm.github.io/static/js/453.acca0757.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.94af4fa8.css",
-    "static/js/main.6d1030d1.js"
+    "static/js/main.8557e5d8.js"
   ]
 }
