@@ -712,7 +712,8 @@
                     <tbody>
                         <tr>
                             <td colspan="5" style="background-color: var(--highlight-bg); color: var(--text-color);">
-                                <strong>Without Embeddings</strong></td>
+                                <strong>Without Embeddings</strong>
+                            </td>
                         </tr>
                         <tr>
                             <td>Random Forest</td>
@@ -751,7 +752,8 @@
                         </tr>
                         <tr>
                             <td colspan="5" style="background-color: var(--highlight-bg); color: var(--text-color);">
-                                <strong>With Embeddings</strong></td>
+                                <strong>With Embeddings</strong>
+                            </td>
                         </tr>
                         <tr>
                             <td>Random Forest</td>
@@ -858,84 +860,375 @@
         <section id="features">
             <h2>Feature Importance Analysis</h2>
 
-            <h3>Top Individual Features</h3>
+            <h3>Detailed Analysis of Top Predictive Features</h3>
+            <div class="box">
+                <p>Understanding which features drive prediction performance provides valuable insights into what
+                    factors affect GitHub issue resolution times. This section expands on the visualizations above with
+                    detailed comparisons between models and feature sets.</p>
+            </div>
+
+            <h4>Top Features Without Embeddings: Ensemble Model</h4>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Feature</th>
+                            <th>Importance</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span class="tooltip">classification_uncertainty<span class="tooltiptext">A measure of
+                                        how confident the classification model is about whether an issue will be fixed
+                                        or not. Higher uncertainty values indicate that the model found the
+                                        classification decision difficult, which often correlates with more complex or
+                                        ambiguous issues.</span></span></td>
+                            <td>25.58%</td>
+                            <td>The single most important predictor, suggesting that issues that are difficult to
+                                classify tend to have less predictable resolution times.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span class="tooltip">created_year<span class="tooltiptext">The year in which the issue
+                                        was created. This captures the project's maturity and the evolution of
+                                        development practices over time.</span></span></td>
+                            <td>7.19%</td>
+                            <td>Strong temporal signal indicating that resolution patterns change significantly over a
+                                project's lifetime.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span class="tooltip">body_length<span class="tooltiptext">The total character count in
+                                        the issue description. Longer descriptions often contain more detail about the
+                                        issue, which can either help resolution (by providing more context) or indicate
+                                        complexity.</span></span></td>
+                            <td>5.18%</td>
+                            <td>Issues with longer descriptions may be more complex but also provide more context for
+                                resolution.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><span class="tooltip">body_word_count<span class="tooltiptext">The number of words in
+                                        the issue description. Similar to body_length but normalized for language
+                                        patterns (e.g., some languages use more characters per word than
+                                        others).</span></span></td>
+                            <td>4.47%</td>
+                            <td>Complements body_length; the two together suggest that issue verbosity is a strong
+                                signal.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><span class="tooltip">created_day_of_month<span class="tooltiptext">The day of the month
+                                        (1-31) when the issue was created. This can capture cyclical patterns in
+                                        development activity and issue creation.</span></span></td>
+                            <td>4.19%</td>
+                            <td>Suggests monthly cycles in development activity affect resolution time.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><span class="tooltip">wontfix_probability<span class="tooltiptext">The model's estimate
+                                        of how likely an issue is to be classified as "won't fix." Higher probabilities
+                                        suggest the issue might be on the borderline, potentially affecting handling
+                                        time even if it's ultimately addressed.</span></span></td>
+                            <td>3.65%</td>
+                            <td>Issues with higher probability of being won't-fix (even if classified as valid) tend to
+                                have distinctive resolution patterns.</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><span class="tooltip">code_to_text_ratio<span class="tooltiptext">The ratio of code
+                                        characters to total characters in the issue description. A higher ratio
+                                        indicates more code examples or snippets relative to explanatory
+                                        text.</span></span></td>
+                            <td>3.62%</td>
+                            <td>Issues with more code relative to explanatory text may be more precisely defined.</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><span class="tooltip">link_count<span class="tooltiptext">The number of hyperlinks in
+                                        the issue description. Links often point to related issues, documentation, or
+                                        external resources that provide context or prerequisites.</span></span></td>
+                            <td>3.57%</td>
+                            <td>Issues that reference other resources may have dependencies or broader context affecting
+                                resolution time.</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><span class="tooltip">created_hour<span class="tooltiptext">The hour of the day (0-23)
+                                        when the issue was created. This can indicate whether the issue was created
+                                        during typical working hours or off-hours.</span></span></td>
+                            <td>3.41%</td>
+                            <td>The time of day when issues are created correlates with resolution patterns, possibly
+                                reflecting timezone differences or work schedules.</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><span class="tooltip">created_month<span class="tooltiptext">The month (1-12) when the
+                                        issue was created. This can capture seasonal patterns in development
+                                        activity.</span></span></td>
+                            <td>2.38%</td>
+                            <td>Seasonal patterns affect resolution time, possibly due to release cycles, holidays, or
+                                contributor availability.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Top Features With Embeddings: Ensemble Model</h4>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Feature</th>
+                            <th>Importance</th>
+                            <th>Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>classification_uncertainty</td>
+                            <td>11.86%</td>
+                            <td>↓ 13.72%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>created_year</td>
+                            <td>5.06%</td>
+                            <td>↓ 2.13%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>wontfix_probability</td>
+                            <td>2.46%</td>
+                            <td>↓ 1.19%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>embed_0</td>
+                            <td>2.33%</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>embed_5</td>
+                            <td>1.89%</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>embed_2</td>
+                            <td>1.81%</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>link_count</td>
+                            <td>1.80%</td>
+                            <td>↓ 1.77%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>list_item_count</td>
+                            <td>1.60%</td>
+                            <td>↓ 0.77%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>embed_3</td>
+                            <td>1.47%</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>embed_4</td>
+                            <td>1.31%</td>
+                            <td>New</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Key Shifts When Adding Embeddings</h4>
+                <ul>
+                    <li><strong>Classification uncertainty</strong> drops from 25.58% to 11.86% importance but remains
+                        the top individual feature</li>
+                    <li><strong>Embedding dimensions</strong> collectively account for 63.2% of predictive power</li>
+                    <li><strong>Content-based features</strong> like body_length and body_word_count drop dramatically
+                        in importance as embeddings capture their semantic signal more effectively</li>
+                    <li><strong>temporal features</strong> (created_year, created_day_of_month) decline in importance
+                        but remain influential</li>
+                    <li><strong>Overall distribution</strong> becomes more even, with no single feature dominating</li>
+                </ul>
+            </div>
+
+            <h3>XGBoost vs. Ensemble: Feature Importance Comparison</h3>
             <div class="comparison-grid">
                 <div class="highlight-box">
-                    <h4>Without Embeddings</h4>
+                    <h4>XGBoost Feature Importance (No Embeddings)</h4>
                     <div class="feature-chart">
                         <div class="feature-chart-item">
                             <div class="feature-label">classification_uncertainty</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 76.74%;"></div>
-                                <span class="feature-value">25.58%</span>
+                                <div class="feature-bar" style="width: 85.20%;"></div>
+                                <span class="feature-value">85.20%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
                             <div class="feature-label">created_year</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 21.58%;"></div>
-                                <span class="feature-value">7.19%</span>
+                                <div class="feature-bar" style="width: 1.97%;"></div>
+                                <span class="feature-value">1.97%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
-                            <div class="feature-label">body_length</div>
+                            <div class="feature-label">has_error_message</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 15.54%;"></div>
-                                <span class="feature-value">5.18%</span>
+                                <div class="feature-bar" style="width: 1.40%;"></div>
+                                <span class="feature-value">1.40%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
-                            <div class="feature-label">body_word_count</div>
+                            <div class="feature-label">author_is_core_contributor</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 13.41%;"></div>
-                                <span class="feature-value">4.47%</span>
+                                <div class="feature-bar" style="width: 1.26%;"></div>
+                                <span class="feature-value">1.26%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
-                            <div class="feature-label">created_day_of_month</div>
+                            <div class="feature-label">link_count</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 12.58%;"></div>
-                                <span class="feature-value">4.19%</span>
+                                <div class="feature-bar" style="width: 1.22%;"></div>
+                                <span class="feature-value">1.22%</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="highlight-box">
-                    <h4>With Embeddings</h4>
+                    <h4>Ensemble Feature Importance (No Embeddings)</h4>
                     <div class="feature-chart">
                         <div class="feature-chart-item">
                             <div class="feature-label">classification_uncertainty</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 35.58%;"></div>
+                                <div class="feature-bar" style="width: 25.58%;"></div>
+                                <span class="feature-value">25.58%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">created_year</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 7.19%;"></div>
+                                <span class="feature-value">7.19%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">body_length</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 5.18%;"></div>
+                                <span class="feature-value">5.18%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">body_word_count</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 4.47%;"></div>
+                                <span class="feature-value">4.47%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">created_day_of_month</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 4.19%;"></div>
+                                <span class="feature-value">4.19%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="highlight-box">
+                    <h4>XGBoost Feature Importance (With Embeddings)</h4>
+                    <div class="feature-chart">
+                        <div class="feature-chart-item">
+                            <div class="feature-label">classification_uncertainty</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 38.18%;"></div>
+                                <span class="feature-value">38.18%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">wontfix_probability</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 4.88%;"></div>
+                                <span class="feature-value">4.88%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">created_year</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 3.54%;"></div>
+                                <span class="feature-value">3.54%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">list_item_count</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 2.60%;"></div>
+                                <span class="feature-value">2.60%</span>
+                            </div>
+                        </div>
+                        <div class="feature-chart-item">
+                            <div class="feature-label">link_count</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 2.57%;"></div>
+                                <span class="feature-value">2.57%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Ensemble Feature Importance (With Embeddings)</h4>
+                    <div class="feature-chart">
+                        <div class="feature-chart-item">
+                            <div class="feature-label">classification_uncertainty</div>
+                            <div class="feature-bar-container">
+                                <div class="feature-bar" style="width: 11.86%;"></div>
                                 <span class="feature-value">11.86%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
                             <div class="feature-label">created_year</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 15.17%;"></div>
+                                <div class="feature-bar" style="width: 5.06%;"></div>
                                 <span class="feature-value">5.06%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
                             <div class="feature-label">wontfix_probability</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 7.39%;"></div>
+                                <div class="feature-bar" style="width: 2.46%;"></div>
                                 <span class="feature-value">2.46%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
                             <div class="feature-label">embed_0</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 6.98%;"></div>
+                                <div class="feature-bar" style="width: 2.33%;"></div>
                                 <span class="feature-value">2.33%</span>
                             </div>
                         </div>
                         <div class="feature-chart-item">
                             <div class="feature-label">embed_5</div>
                             <div class="feature-bar-container">
-                                <div class="feature-bar" style="width: 5.68%;"></div>
+                                <div class="feature-bar" style="width: 1.89%;"></div>
                                 <span class="feature-value">1.89%</span>
                             </div>
                         </div>
@@ -943,256 +1236,412 @@
                 </div>
             </div>
 
-            <h3>Feature Category Importance</h3>
-            <div class="feature-category-chart">
-                <div class="feature-category">
-                    <h4>Without Embeddings</h4>
-                    <div class="pie-chart" id="featureCategoryChart1"></div>
-                    <div class="pie-chart-legend" id="featureCategoryLegend1"></div>
-                </div>
-                <div class="feature-category">
-                    <h4>With Embeddings</h4>
-                    <div class="pie-chart" id="featureCategoryChart2"></div>
-                    <div class="pie-chart-legend" id="featureCategoryLegend2"></div>
-                </div>
-            </div>
-
-            <h3>Key Insights from Feature Analysis</h3>
-            <ul>
-                <li>The classification layer's outputs (uncertainty and probability) are highly important predictive
-                    features</li>
-                <li>When embeddings are added, the feature importance becomes more distributed</li>
-                <li>Embeddings collectively account for over 60% of the model's predictive power</li>
-                <li>Temporal features (created_year, day, hour) remain consistently important</li>
-                <li>Content-based features like code presence and link count provide significant signal</li>
-                <li>Author features (core contributor status) have minimal impact</li>
-            </ul>
-
             <div class="box">
-                <p><strong>Analysis:</strong> The significant importance of classification uncertainty and text
-                    embeddings suggests that the <span class="tooltip">semantic content<span class="tooltiptext">The
-                            underlying meaning and context expressed in the issue text, beyond just keywords or
-                            surface-level statistics. This includes concepts like the problem domain, the complexity of
-                            the issue description, technical specificity, and how the issue is framed - all of which can
-                            influence how quickly it might be resolved.</span></span> of issues is valuable for
-                    predicting resolution time. The system effectively leverages this through the two-layer approach.
-                </p>
-            </div>
-            <h3>Resolution Time Distribution Challenge</h3>
-            <div class="warning-box">
-                <p><strong>Resolution Time Statistics:</strong></p>
+                <h4>Model Comparison Insights</h4>
+                <p>The striking differences between XGBoost and the ensemble model's feature importance reveal
+                    fundamental differences in how these models learn:</p>
                 <ul>
-                    <li><strong>Mean:</strong> 3,404.38 hours (~142 days)</li>
-                    <li><strong>Median:</strong> 105.51 hours (~4.4 days)</li>
-                    <li><strong>Maximum:</strong> 148,492.47 hours (~17 years)</li>
-                    <li><strong>25th Percentile:</strong> 1.64 hours</li>
-                    <li><strong>75th Percentile:</strong> 1,752.48 hours (~73 days)</li>
-                    <li><strong>95th Percentile:</strong> 20,572.32 hours (~857 days)</li>
-                </ul>
-                <p>The extreme disparity between mean (3,404 hours) and median (105.5 hours) resolution times reveals a
-                    highly skewed distribution with significant outliers. With some issues taking nearly 17 years to
-                    resolve while others are addressed within hours, the current model's modest R² value of 0.19 is
-                    unsurprising.</p>
-                <p>This extreme variability makes the current model appear ineffective for practical predictions.
-                    However, with additional data and features related to repository maintainers, issue authors, and
-                    codebase characteristics (such as complexity metrics, test coverage, and component dependencies), a
-                    significantly more powerful predictive model could be developed. Incorporating such contextual
-                    features would likely capture the organizational and technical factors that drive the wide variance
-                    in resolution times.</p>
-            </div>
-        </section>
-
-        <hr class="section-divider">
-
-        <!-- Architecture Section -->
-        <section id="architecture">
-            <h2>System Architecture Analysis</h2>
-
-            <h3>Python Code Analysis</h3>
-            <p>The system consists of two main Python scripts:</p>
-
-            <div class="highlight-box">
-                <h4>1. <code>predict_resolution_time.py</code></h4>
-                <p>This script implements the two-layer prediction system:</p>
-                <ul>
-                    <li><strong>Data Loading and Preprocessing:</strong>
-                        <ul>
-                            <li>Loads repository data with issue details</li>
-                            <li>Applies regex-based deterministic classification</li>
-                            <li>Extracts features from creation time</li>
-                            <li>Loads and integrates text embeddings if available</li>
-                        </ul>
-                    </li>
-                    <li><strong>Classification Layer:</strong>
-                        <ul>
-                            <li>Trains a classifier (Random Forest, XGBoost, or GPU Forest)</li>
-                            <li>Applies classifier only to ambiguous issues</li>
-                            <li>Calculates classification uncertainty as a feature</li>
-                        </ul>
-                    </li>
-                    <li><strong>Regression Layer:</strong>
-                        <ul>
-                            <li>Trains multiple regression models (Random Forest, Gradient Boosting, XGBoost, GPU
-                                Forest)</li>
-                            <li>Evaluates and compares model performance</li>
-                            <li>Visualizes feature importance and errors</li>
-                        </ul>
-                    </li>
+                    <li><strong>XGBoost's Focus:</strong> XGBoost places extraordinary importance (85.20%) on
+                        classification_uncertainty when embeddings are not used, suggesting it relies heavily on this
+                        single feature for predictions.</li>
+                    <li><strong>Ensemble's Balanced Approach:</strong> The ensemble model distributes importance more
+                        evenly across features, suggesting it leverages multiple signals more effectively.</li>
+                    <li><strong>Embedding Effect:</strong> Adding embeddings reduces XGBoost's reliance on
+                        classification_uncertainty from 85.20% to 38.18%, while the ensemble model sees a more dramatic
+                        shift from 25.58% to 11.86%.</li>
+                    <li><strong>Feature Selection:</strong> XGBoost identifies different secondary features as important
+                        compared to the ensemble—for example, has_error_message and author_is_core_contributor rank
+                        higher in XGBoost.</li>
                 </ul>
             </div>
 
-            <div class="highlight-box">
-                <h4>2. <code>ensemble.py</code></h4>
-                <p>This script creates and evaluates ensemble models:</p>
-                <ul>
-                    <li><strong>Ensemble Creation:</strong>
-                        <ul>
-                            <li>Loads trained models from the previous script</li>
-                            <li>Implements various ensemble methods (weighted, average, voting)</li>
-                            <li>Optionally optimizes weights for weighted ensemble</li>
-                        </ul>
-                    </li>
-                    <li><strong>Performance Analysis:</strong>
-                        <ul>
-                            <li>Compares ensemble to individual models</li>
-                            <li>Calculates improvement percentages</li>
-                            <li>Analyzes errors by issue category</li>
-                        </ul>
-                    </li>
-                    <li><strong>Feature Importance:</strong>
-                        <ul>
-                            <li>Calculates weighted feature importance across models</li>
-                            <li>Visualizes importance by feature and category</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <h3>Technical Implementation Details</h3>
+            <h3>Individual Model Analysis</h3>
             <div class="comparison-grid">
                 <div class="box">
-                    <h4>GPU Acceleration</h4>
-                    <p>The system uses GPU acceleration through:</p>
+                    <h4>Random Forest Importance Pattern</h4>
+                    <p>Random Forest shows a more balanced feature distribution:</p>
                     <ul>
-                        <li><code>cuml</code> for GPU-based Random Forest</li>
-                        <li><code>cupy</code> for GPU array operations</li>
-                        <li>XGBoost with <code>tree_method='gpu_hist'</code></li>
+                        <li><strong>Top Features:</strong> body_length (12.81%), body_word_count (10.96%),
+                            created_day_of_month (10.19%)</li>
+                        <li><strong>Classification features</strong> rank lower: uncertainty (6.15%),
+                            wontfix_probability (6.39%)</li>
+                        <li><strong>With embeddings:</strong> No single embedding dimension exceeds 2.76% importance
+                        </li>
+                        <li>Shows higher appreciation for content-based features than other models</li>
                     </ul>
-                    <p><small>This provides significant speedup for large datasets.</small></p>
                 </div>
 
                 <div class="box">
-                    <h4>Error Handling</h4>
-                    <p>The system implements robust error handling:</p>
+                    <h4>Gradient Boosting Importance Pattern</h4>
+                    <p>Gradient Boosting shows a hybrid approach:</p>
                     <ul>
-                        <li>Graceful fallback to CPU if GPU fails</li>
-                        <li>Handling missing features and values</li>
-                        <li>Data validation and cleaning</li>
+                        <li><strong>Top Features:</strong> created_year (19.77%), classification_uncertainty (10.98%),
+                            link_count (8.19%)</li>
+                        <li>Has the strongest emphasis on temporal features among all models</li>
+                        <li><strong>With embeddings:</strong> Still prioritizes created_year (12.65%) over
+                            classification features</li>
+                        <li>Shows unique appreciation for link_count compared to other models</li>
                     </ul>
-                    <p><small>This ensures the pipeline can process diverse GitHub data reliably.</small></p>
                 </div>
             </div>
 
-            <h3>Critical Path Analysis</h3>
-            <p>Our runtime summary shows:</p>
-            <ul>
-                <li>Without embeddings: 318.53 seconds (5.31 minutes)</li>
-                <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
-            </ul>
-            <p>The significant increase in runtime with embeddings (14.4x slower) highlights the computational cost of
-                processing the additional 50 embedding dimensions for each issue.</p>
-        </section>
+            <h3>Feature Category Analysis</h3>
 
-        <hr class="section-divider">
+            <div class="comparison-grid">
+                <div class="box">
+                    <h4>Classification Layer Features</h4>
+                    <p>Classification-related features provide critical signals:</p>
+                    <ul>
+                        <li><strong>uncertainty</strong> - Issues with ambiguous classification signals tend to have
+                            unpredictable resolution times</li>
+                        <li><strong>wontfix_probability</strong> - Higher probabilities correlate with longer resolution
+                            times, even for issues ultimately classified as valid</li>
+                        <li>The decreasing importance of these features when embeddings are added suggests that
+                            embedding dimensions capture some of the same semantic signals</li>
+                        <li>XGBoost's extreme reliance on classification_uncertainty suggests it identifies subtle
+                            patterns in this feature that other models miss</li>
+                    </ul>
+                </div>
 
-        <!-- Cloud Migration Section -->
-        <section id="cloud">
-            <h2>Cloud Migration Plan</h2>
+                <div class="box">
+                    <h4>Temporal Features</h4>
+                    <p>Time-related features reveal important patterns:</p>
+                    <ul>
+                        <li><strong>created_year</strong> - Projects evolve significantly over time, affecting
+                            resolution patterns</li>
+                        <li><strong>created_day_of_month</strong> - Monthly cycles affect resolution (possibly due to
+                            sprint patterns or release schedules)</li>
+                        <li><strong>created_hour</strong> - Issues created at different times of day show different
+                            resolution patterns</li>
+                        <li>Gradient Boosting places the highest importance on temporal features, particularly
+                            created_year</li>
+                        <li>These features remain important even with embeddings, suggesting they capture signals
+                            separate from semantic content</li>
+                    </ul>
+                </div>
+            </div>
 
-            <h3>Current Limitations</h3>
-            <p>The current system has several limitations that motivate a cloud migration:</p>
-            <ul>
-                <li>Processing time increases significantly with embeddings (14.4x slower)</li>
-                <li>Limited to the GitHub data currently available</li>
-                <li>Hardware constraints for large-scale processing</li>
-                <li>Class imbalance handling requires more sophisticated approaches</li>
-            </ul>
+            <div class="comparison-grid">
+                <div class="box">
+                    <h4>Content Features</h4>
+                    <p>Issue content characteristics provide strong signals:</p>
+                    <ul>
+                        <li><strong>body_length/word_count</strong> - Longer issues likely involve more complex problems
+                        </li>
+                        <li><strong>code_to_text_ratio</strong> - More code relative to explanation may indicate better
+                            reproducibility</li>
+                        <li><strong>link_count</strong> - References to other resources may indicate dependencies</li>
+                        <li><strong>list_item_count</strong> - More structured content may be clearer and easier to
+                            resolve</li>
+                        <li>Random Forest places the highest emphasis on these features</li>
+                        <li>These features decrease dramatically in importance when embeddings are added as embeddings
+                            capture their semantic information more effectively</li>
+                    </ul>
+                </div>
 
-            <div class="highlight-box">
-                <h3>Cloud Migration Benefits</h3>
+                <div class="box">
+                    <h4>Embedding Features</h4>
+                    <p>Text embeddings dominate prediction when available:</p>
+                    <ul>
+                        <li>Collectively account for 63.2% of feature importance in the ensemble model</li>
+                        <li>Embed_0, embed_5, and embed_2 are consistently the most important embedding dimensions
+                            across models</li>
+                        <li>These embedding dimensions likely capture semantic aspects of issues like:</li>
+                        <ul>
+                            <li>Problem domain (UI, backend, database, etc.)</li>
+                            <li>Issue type (bug, feature request, documentation)</li>
+                            <li>Technical complexity signals</li>
+                            <li>Writing style and clarity</li>
+                        </ul>
+                        <li>The embedding model effectively condenses semantic information that would otherwise require
+                            many engineered features</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Surprising Feature Findings</h3>
+            <div class="warning-box">
+                <h4>Model Disagreement on Author Features</h4>
+                <p>Models disagree significantly on the importance of author-related features:</p>
                 <ul>
-                    <li><strong>Scalability:</strong> Easily scale up compute resources for larger datasets</li>
-                    <li><strong>Data Access:</strong> Process the comprehensive GitHub Archive data</li>
-                    <li><strong>Parallel Processing:</strong> Distribute workloads across multiple nodes</li>
-                    <li><strong>Cost Efficiency:</strong> Pay only for resources used during processing</li>
+                    <li><strong>XGBoost:</strong> Ranks author_is_core_contributor as its 4th most important feature
+                        (1.26% importance)</li>
+                    <li><strong>Ensemble:</strong> Ranks author_is_core_contributor as 17th (0.67% importance)</li>
+                    <li><strong>Random Forest:</strong> Ranks it last at 22nd (0.31% importance)</li>
+                    <li>This disagreement suggests the relationship between author status and resolution time is complex
+                        and possibly non-linear</li>
+                    <li>XGBoost may be better at capturing specific resolution patterns for core contributor issues</li>
                 </ul>
             </div>
 
-            <h3>GitHub Archive Integration</h3>
-            <p>The <a href="https://www.gharchive.org/" target="_blank">GitHub Archive</a> provides a comprehensive
-                record of GitHub events:</p>
-            <ul>
-                <li>Contains data since 2011 with hourly archives</li>
-                <li>Includes issue creation, updates, and closures</li>
-                <li>Provides rich metadata beyond what's in current dataset</li>
-                <li>Enables analysis of temporal patterns across the entire GitHub ecosystem</li>
-            </ul>
-
-            <h3>Text Embedding Model Analysis</h3>
             <div class="box">
-                <h4>HuggingFace Multilingual E5-Large-Instruct</h4>
-                <p>The system uses <span class="tooltip">intfloat/multilingual-e5-large-instruct<span
-                            class="tooltiptext">A state-of-the-art text embedding model from HuggingFace that converts
-                            text into high-dimensional vector representations. It's based on the E5 architecture (which
-                            stands for "Embeddings from bidirectional Encoder representations and contrastive predictive
-                            coding") and has been fine-tuned with instructions to better capture task-specific
-                            semantics. With 560M parameters, it offers a balance between quality and computational
-                            efficiency.</span></span> for generating embeddings.</p>
-
-                <h4>Advantages:</h4>
+                <h4>Bug Identification Features</h4>
+                <p>Features related to bug identification show surprising patterns:</p>
                 <ul>
-                    <li><strong>Speed:</strong> Relatively fast inference compared to larger models</li>
-                    <li><strong>Multilingual:</strong> Handles issues in different languages</li>
-                    <li><strong>Instruction-tuned:</strong> Better at capturing task-specific semantics</li>
-                    <li><strong>Reasonable Size:</strong> 560M parameters (vs. billions in larger models)</li>
-                </ul>
-
-                <h4>Limitations:</h4>
-                <ul>
-                    <li><strong>Quality Tradeoff:</strong> Not as high-quality as larger embedding models</li>
-                    <li><strong>Technical Content:</strong> May not fully capture programming-specific semantics</li>
-                    <li><strong>Context Length:</strong> Limited context window compared to newer models</li>
+                    <li><strong>has_error_message:</strong> Ranked 3rd (1.40%) by XGBoost but only 14th (1.05%) by the
+                        ensemble</li>
+                    <li><strong>has_reproduction_steps:</strong> Generally low importance across all models despite
+                        being considered valuable in bug reports</li>
+                    <li><strong>has_code:</strong> Very low importance (typically below 0.6%) compared to
+                        code_to_text_ratio (3.62% in ensemble)</li>
+                    <li>This suggests that the <em>quality</em> and <em>proportion</em> of code in an issue is more
+                        important than its mere presence</li>
+                    <li>XGBoost appears more sensitive to specific technical indicators in the issue content</li>
                 </ul>
             </div>
 
-            <h3>Cloud Implementation Roadmap</h3>
-            <ol>
-                <li><strong>Data Pipeline:</strong> Set up pipeline to ingest and process GitHub Archive data</li>
-                <li><strong>Distributed Processing:</strong> Refactor code for distributed execution (e.g., using Spark)
+            <h3>Strategic Feature Engineering Opportunities</h3>
+            <p>Based on the comprehensive feature analysis, several opportunities for improved feature engineering
+                emerge:</p>
+
+            <div class="comparison-grid">
+                <div class="highlight-box">
+                    <h4>Repository Context Features</h4>
+                    <ul>
+                        <li>Repository age and maturity</li>
+                        <li>Number of active contributors</li>
+                        <li>Contributor-to-issue ratio</li>
+                        <li>Release cadence and proximity to releases</li>
+                        <li>Codebase size and complexity metrics</li>
+                        <li>Test coverage and CI/CD pipeline metrics</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Issue Relationship Features</h4>
+                    <ul>
+                        <li>Number of related or linked issues</li>
+                        <li>Dependency graph metrics</li>
+                        <li>Issue priority relative to other open issues</li>
+                        <li>Component popularity/activity level</li>
+                        <li>Historical resolution times for similar issues</li>
+                        <li>Issue "heat" (comments, reactions, subscriptions)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="highlight-box">
+                    <h4>Developer Context Features</h4>
+                    <ul>
+                        <li>Author contribution history and expertise areas</li>
+                        <li>Maintainer availability patterns</li>
+                        <li>Reviewer response times</li>
+                        <li>Team workload indicators</li>
+                        <li>Geographic distribution of contributors</li>
+                        <li>Timezone alignment between author and maintainers</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Advanced Semantic Features</h4>
+                    <ul>
+                        <li>Topic modeling of issue content</li>
+                        <li>Named entity recognition for technologies mentioned</li>
+                        <li>Code-specific embeddings for technical content</li>
+                        <li>Sentiment analysis of issue descriptions</li>
+                        <li>Complexity metrics for code snippets</li>
+                        <li>Technical jargon density analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>Incorporating these additional feature categories could substantially improve the model's predictive
+                power beyond the current R² of 0.19, potentially making the system more useful for practical project
+                planning and resource allocation.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Architecture Section -->
+    <section id="architecture">
+        <h2>System Architecture Analysis</h2>
+
+        <h3>Python Code Analysis</h3>
+        <p>The system consists of two main Python scripts:</p>
+
+        <div class="highlight-box">
+            <h4>1. <code>predict_resolution_time.py</code></h4>
+            <p>This script implements the two-layer prediction system:</p>
+            <ul>
+                <li><strong>Data Loading and Preprocessing:</strong>
+                    <ul>
+                        <li>Loads repository data with issue details</li>
+                        <li>Applies regex-based deterministic classification</li>
+                        <li>Extracts features from creation time</li>
+                        <li>Loads and integrates text embeddings if available</li>
+                    </ul>
                 </li>
-                <li><strong>Embedding Service:</strong> Deploy embedding model as a scalable service</li>
-                <li><strong>GPU Instances:</strong> Use cloud GPU instances for model training</li>
-                <li><strong>Storage Optimization:</strong> Implement efficient storage of embeddings and features</li>
-                <li><strong>Class Imbalance Handling:</strong> Implement techniques like oversampling or cost-sensitive
-                    learning</li>
-                <li><strong>Monitoring:</strong> Set up performance monitoring and alerting</li>
-            </ol>
+                <li><strong>Classification Layer:</strong>
+                    <ul>
+                        <li>Trains a classifier (Random Forest, XGBoost, or GPU Forest)</li>
+                        <li>Applies classifier only to ambiguous issues</li>
+                        <li>Calculates classification uncertainty as a feature</li>
+                    </ul>
+                </li>
+                <li><strong>Regression Layer:</strong>
+                    <ul>
+                        <li>Trains multiple regression models (Random Forest, Gradient Boosting, XGBoost, GPU
+                            Forest)</li>
+                        <li>Evaluates and compares model performance</li>
+                        <li>Visualizes feature importance and errors</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h4>2. <code>ensemble.py</code></h4>
+            <p>This script creates and evaluates ensemble models:</p>
+            <ul>
+                <li><strong>Ensemble Creation:</strong>
+                    <ul>
+                        <li>Loads trained models from the previous script</li>
+                        <li>Implements various ensemble methods (weighted, average, voting)</li>
+                        <li>Optionally optimizes weights for weighted ensemble</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Analysis:</strong>
+                    <ul>
+                        <li>Compares ensemble to individual models</li>
+                        <li>Calculates improvement percentages</li>
+                        <li>Analyzes errors by issue category</li>
+                    </ul>
+                </li>
+                <li><strong>Feature Importance:</strong>
+                    <ul>
+                        <li>Calculates weighted feature importance across models</li>
+                        <li>Visualizes importance by feature and category</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h3>Technical Implementation Details</h3>
+        <div class="comparison-grid">
+            <div class="box">
+                <h4>GPU Acceleration</h4>
+                <p>The system uses GPU acceleration through:</p>
+                <ul>
+                    <li><code>cuml</code> for GPU-based Random Forest</li>
+                    <li><code>cupy</code> for GPU array operations</li>
+                    <li>XGBoost with <code>tree_method='gpu_hist'</code></li>
+                </ul>
+                <p><small>This provides significant speedup for large datasets.</small></p>
+            </div>
 
             <div class="box">
-                <h4>Trade-offs and Considerations</h4>
-                <p>When migrating to the cloud, several trade-offs need to be considered:</p>
+                <h4>Error Handling</h4>
+                <p>The system implements robust error handling:</p>
                 <ul>
-                    <li><strong>Cost vs. Performance:</strong> More powerful instances cost more but reduce processing
-                        time</li>
-                    <li><strong>Embedding Quality vs. Speed:</strong> Consider testing larger embedding models despite
-                        increased cost</li>
-                    <li><strong>Data Volume vs. Detail:</strong> Balance between processing more repositories or deeper
-                        analysis</li>
-                    <li><strong>Real-time vs. Batch Processing:</strong> Determine if predictions need to be real-time
-                        or batched</li>
+                    <li>Graceful fallback to CPU if GPU fails</li>
+                    <li>Handling missing features and values</li>
+                    <li>Data validation and cleaning</li>
                 </ul>
+                <p><small>This ensures the pipeline can process diverse GitHub data reliably.</small></p>
             </div>
-        </section>
+        </div>
+
+        <h3>Critical Path Analysis</h3>
+        <p>Our runtime summary shows:</p>
+        <ul>
+            <li>Without embeddings: 318.53 seconds (5.31 minutes)</li>
+            <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
+        </ul>
+        <p>The significant increase in runtime with embeddings (14.4x slower) highlights the computational cost of
+            processing the additional 50 embedding dimensions for each issue.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Cloud Migration Section -->
+    <section id="cloud">
+        <h2>Cloud Migration Plan</h2>
+
+        <h3>Current Limitations</h3>
+        <p>The current system has several limitations that motivate a cloud migration:</p>
+        <ul>
+            <li>Processing time increases significantly with embeddings (14.4x slower)</li>
+            <li>Limited to the GitHub data currently available</li>
+            <li>Hardware constraints for large-scale processing</li>
+            <li>Class imbalance handling requires more sophisticated approaches</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h3>Cloud Migration Benefits</h3>
+            <ul>
+                <li><strong>Scalability:</strong> Easily scale up compute resources for larger datasets</li>
+                <li><strong>Data Access:</strong> Process the comprehensive GitHub Archive data</li>
+                <li><strong>Parallel Processing:</strong> Distribute workloads across multiple nodes</li>
+                <li><strong>Cost Efficiency:</strong> Pay only for resources used during processing</li>
+            </ul>
+        </div>
+
+        <h3>GitHub Archive Integration</h3>
+        <p>The <a href="https://www.gharchive.org/" target="_blank">GitHub Archive</a> provides a comprehensive
+            record of GitHub events:</p>
+        <ul>
+            <li>Contains data since 2011 with hourly archives</li>
+            <li>Includes issue creation, updates, and closures</li>
+            <li>Provides rich metadata beyond what's in current dataset</li>
+            <li>Enables analysis of temporal patterns across the entire GitHub ecosystem</li>
+        </ul>
+
+        <h3>Text Embedding Model Analysis</h3>
+        <div class="box">
+            <h4>HuggingFace Multilingual E5-Large-Instruct</h4>
+            <p>The system uses <span class="tooltip">intfloat/multilingual-e5-large-instruct<span class="tooltiptext">A
+                        state-of-the-art text embedding model from HuggingFace that converts
+                        text into high-dimensional vector representations. It's based on the E5 architecture (which
+                        stands for "Embeddings from bidirectional Encoder representations and contrastive predictive
+                        coding") and has been fine-tuned with instructions to better capture task-specific
+                        semantics. With 560M parameters, it offers a balance between quality and computational
+                        efficiency.</span></span> for generating embeddings.</p>
+
+            <h4>Advantages:</h4>
+            <ul>
+                <li><strong>Speed:</strong> Relatively fast inference compared to larger models</li>
+                <li><strong>Multilingual:</strong> Handles issues in different languages</li>
+                <li><strong>Instruction-tuned:</strong> Better at capturing task-specific semantics</li>
+                <li><strong>Reasonable Size:</strong> 560M parameters (vs. billions in larger models)</li>
+            </ul>
+
+            <h4>Limitations:</h4>
+            <ul>
+                <li><strong>Quality Tradeoff:</strong> Not as high-quality as larger embedding models</li>
+                <li><strong>Technical Content:</strong> May not fully capture programming-specific semantics</li>
+                <li><strong>Context Length:</strong> Limited context window compared to newer models</li>
+            </ul>
+        </div>
+
+        <h3>Cloud Implementation Roadmap</h3>
+        <ol>
+            <li><strong>Data Pipeline:</strong> Set up pipeline to ingest and process GitHub Archive data</li>
+            <li><strong>Distributed Processing:</strong> Refactor code for distributed execution (e.g., using Spark)
+            </li>
+            <li><strong>Embedding Service:</strong> Deploy embedding model as a scalable service</li>
+            <li><strong>GPU Instances:</strong> Use cloud GPU instances for model training</li>
+            <li><strong>Storage Optimization:</strong> Implement efficient storage of embeddings and features</li>
+            <li><strong>Class Imbalance Handling:</strong> Implement techniques like oversampling or cost-sensitive
+                learning</li>
+            <li><strong>Monitoring:</strong> Set up performance monitoring and alerting</li>
+        </ol>
+
+        <div class="box">
+            <h4>Trade-offs and Considerations</h4>
+            <p>When migrating to the cloud, several trade-offs need to be considered:</p>
+            <ul>
+                <li><strong>Cost vs. Performance:</strong> More powerful instances cost more but reduce processing
+                    time</li>
+                <li><strong>Embedding Quality vs. Speed:</strong> Consider testing larger embedding models despite
+                    increased cost</li>
+                <li><strong>Data Volume vs. Detail:</strong> Balance between processing more repositories or deeper
+                    analysis</li>
+                <li><strong>Real-time vs. Batch Processing:</strong> Determine if predictions need to be real-time
+                    or batched</li>
+            </ul>
+        </div>
+    </section>
     </div>
 
     <a href="#" class="back-to-top" id="backToTop">↑</a>
