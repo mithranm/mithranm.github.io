@@ -25,24 +25,27 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
             color: var(--text);
             background-color: var(--background);
             margin: 0;
             padding: 0;
+            font-size: 16px;
         }
         
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1rem;
+            box-sizing: border-box;
         }
         
         header {
             background-color: var(--primary);
             color: white;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
@@ -50,6 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
         }
         
         h1, h2, h3, h4 {
@@ -60,13 +64,14 @@
         }
         
         h1 {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             text-align: center;
             margin-bottom: 0.5rem;
+            word-wrap: break-word;
         }
         
         h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             color: var(--primary);
             border-bottom: 2px solid var(--primary-light);
             padding-bottom: 0.5rem;
@@ -74,13 +79,13 @@
         }
         
         h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
             color: var(--secondary);
             margin-top: 2rem;
         }
         
         h4 {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: var(--neutral);
         }
         
@@ -93,21 +98,23 @@
             border: 1px solid var(--border);
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
+            padding: 1rem;
             margin-bottom: 1.5rem;
+            overflow-x: auto;
         }
         
         .key-insight {
             background-color: var(--highlight);
             border-left: 4px solid var(--primary);
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             margin: 1.5rem 0;
+            overflow-x: auto;
         }
         
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
             margin: 1.5rem 0;
         }
         
@@ -115,12 +122,12 @@
             background-color: white;
             border: 1px solid var(--border);
             border-radius: 4px;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
         }
         
         .stat-box .value {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 0.5rem;
@@ -133,11 +140,19 @@
             letter-spacing: 0.5px;
         }
         
+        /* Table responsiveness */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            min-width: 600px; /* ensures tables don't get too squished */
         }
         
         th, td {
@@ -149,6 +164,8 @@
         th {
             background-color: var(--table-header);
             font-weight: 600;
+            position: sticky;
+            top: 0;
         }
         
         tr:nth-child(even) {
@@ -162,16 +179,18 @@
         
         .feature-bar-container {
             margin: 2rem 0;
+            overflow-x: auto;
         }
         
         .feature-bar {
             display: flex;
             align-items: center;
             margin-bottom: 0.75rem;
+            min-width: 500px;
         }
         
         .feature-name {
-            width: 250px;
+            width: 200px;
             font-weight: 500;
             padding-right: 1rem;
         }
@@ -210,7 +229,7 @@
             background-color: white;
             border: 1px solid var(--border);
             border-left: 5px solid var(--secondary);
-            padding: 1.25rem 1.5rem;
+            padding: 1rem;
             margin: 1.25rem 0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
@@ -221,8 +240,8 @@
         }
         
         footer {
-            margin-top: 3rem;
-            padding: 2rem 0;
+            margin-top: 2rem;
+            padding: 1.5rem 0;
             background-color: var(--primary);
             color: white;
             text-align: center;
@@ -231,16 +250,17 @@
         
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
         
         .chart-container {
             background-color: white;
             border: 1px solid var(--border);
             border-radius: 4px;
-            padding: 1.5rem;
+            padding: 1rem;
             margin: 1.5rem 0;
+            overflow-x: auto;
         }
         
         .chart {
@@ -250,8 +270,8 @@
         
         .circle-progress {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
         }
         
@@ -279,7 +299,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--primary);
         }
@@ -303,28 +323,44 @@
         .phase-box .metrics {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.5rem;
             margin-top: 0.5rem;
         }
         
         .phase-box .metric {
             background-color: var(--highlight);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
         
         .before-after {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
             margin: 1.5rem 0;
+        }
+        
+        @media (min-width: 640px) {
+            .before-after {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
         }
         
         .before-after .arrow {
             font-size: 2rem;
             color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        @media (min-width: 640px) {
+            .before-after .arrow {
+                transform: rotate(0);
+            }
         }
         
         .before-after .box {
@@ -334,6 +370,7 @@
             border-radius: 4px;
             padding: 1rem;
             text-align: center;
+            width: 100%;
         }
         
         .before-after .value {
@@ -359,18 +396,19 @@
 
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 300px;
+            width: 280px;
+            max-width: 90vw;
             background-color: #fff;
             color: #333;
             text-align: left;
             border-radius: 6px;
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 12px;
             position: absolute;
             z-index: 1;
             bottom: 125%;
             left: 50%;
-            margin-left: -150px;
+            transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.3s;
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
@@ -390,9 +428,12 @@
             border-color: #ccc transparent transparent transparent;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        /* For mobile - show tooltips on tap instead of hover */
+        @media (hover: hover) {
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+                opacity: 1;
+            }
         }
 
         .tooltip-title {
@@ -414,6 +455,30 @@
             font-size: 12px;
             margin-left: 4px;
             cursor: help;
+        }
+        
+        /* For mobile devices - prevent large tooltips from going off-screen */
+        @media (max-width: 768px) {
+            .tooltip .tooltiptext {
+                width: 240px;
+                left: 0;
+                transform: none;
+            }
+            
+            .tooltip .tooltiptext::after {
+                left: 20px;
+            }
+            
+            /* Right-aligned tooltips for elements near the right edge */
+            .tooltip.tooltip-right .tooltiptext {
+                left: auto;
+                right: 0;
+            }
+            
+            .tooltip.tooltip-right .tooltiptext::after {
+                left: auto;
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -633,48 +698,50 @@
             
             <h3>Layer 1: Classification Performance</h3>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Before Embeddings</th>
-                        <th>With Embeddings</th>
-                        <th>Improvement</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Accuracy <span class="help-icon" title="Percentage of all issues correctly classified">?</span></td>
-                        <td>0.9638</td>
-                        <td>0.9653</td>
-                        <td class="positive">+0.0015</td>
-                    </tr>
-                    <tr>
-                        <td>Precision <span class="help-icon" title="When model predicts 'won't-fix', how often it's right">?</span></td>
-                        <td>0.8675</td>
-                        <td>0.9552</td>
-                        <td class="positive">+0.0877</td>
-                    </tr>
-                    <tr>
-                        <td>Recall <span class="help-icon" title="Percentage of actual 'won't-fix' issues found">?</span></td>
-                        <td>0.0710</td>
-                        <td>0.1041</td>
-                        <td class="positive">+0.0331</td>
-                    </tr>
-                    <tr>
-                        <td>F1 Score <span class="help-icon" title="Balance between precision and recall">?</span></td>
-                        <td>0.1313</td>
-                        <td>0.1878</td>
-                        <td class="positive">+0.0565</td>
-                    </tr>
-                    <tr>
-                        <td>AUC <span class="help-icon" title="Overall classification quality (0.5 = random guessing, 1.0 = perfect)">?</span></td>
-                        <td>0.7875</td>
-                        <td>0.8542</td>
-                        <td class="positive">+0.0667</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Before Embeddings</th>
+                            <th>With Embeddings</th>
+                            <th>Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accuracy <span class="help-icon" title="Percentage of all issues correctly classified">?</span></td>
+                            <td>0.9638</td>
+                            <td>0.9653</td>
+                            <td class="positive">+0.0015</td>
+                        </tr>
+                        <tr>
+                            <td>Precision <span class="help-icon" title="When model predicts 'won't-fix', how often it's right">?</span></td>
+                            <td>0.8675</td>
+                            <td>0.9552</td>
+                            <td class="positive">+0.0877</td>
+                        </tr>
+                        <tr>
+                            <td>Recall <span class="help-icon" title="Percentage of actual 'won't-fix' issues found">?</span></td>
+                            <td>0.0710</td>
+                            <td>0.1041</td>
+                            <td class="positive">+0.0331</td>
+                        </tr>
+                        <tr>
+                            <td>F1 Score <span class="help-icon" title="Balance between precision and recall">?</span></td>
+                            <td>0.1313</td>
+                            <td>0.1878</td>
+                            <td class="positive">+0.0565</td>
+                        </tr>
+                        <tr>
+                            <td>AUC <span class="help-icon" title="Overall classification quality (0.5 = random guessing, 1.0 = perfect)">?</span></td>
+                            <td>0.7875</td>
+                            <td>0.8542</td>
+                            <td class="positive">+0.0667</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="key-insight">
                 <h4>Classification Analysis</h4>
@@ -690,98 +757,102 @@
             
             <h3>Layer 2: Resolution Time Prediction Performance</h3>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>Model</th>
-                        <th>MAE (hours) <span class="help-icon" title="Mean Absolute Error - average prediction error">?</span></th>
-                        <th>RMSE (hours) <span class="help-icon" title="Root Mean Square Error - emphasizes larger errors">?</span></th>
-                        <th>Median AE (hours) <span class="help-icon" title="Middle value of all errors - less affected by outliers">?</span></th>
-                        <th>R-squared <span class="help-icon" title="Proportion of variance explained (higher is better)">?</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="tooltip">Random Forest<span class="tooltiptext"><span class="tooltip-title">Random Forest</span>A machine learning model that uses many decision trees together. Each tree votes on the prediction, and the majority wins. It's like asking many different people and taking the most common answer.</span></span></td>
-                        <td>3,878.43</td>
-                        <td>10,390.64</td>
-                        <td>322.83</td>
-                        <td>0.1825</td>
-                    </tr>
-                    <tr>
-                        <td><span class="tooltip">Gradient Boosting<span class="tooltiptext"><span class="tooltip-title">Gradient Boosting</span>A machine learning technique that builds models sequentially, with each new model trying to correct the errors of previous models. It's like having each new team member focus specifically on the mistakes the team has been making.</span></span></td>
-                        <td>3,881.12</td>
-                        <td>10,339.36</td>
-                        <td>350.04</td>
-                        <td>0.1821</td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost</td>
-                        <td>3,875.79</td>
-                        <td>10,321.36</td>
-                        <td>352.11</td>
-                        <td>0.1870</td>
-                    </tr>
-                    <tr>
-                        <td>GPU Forest <span class="help-icon" title="Random Forest variant optimized to run on graphics cards">?</span></td>
-                        <td>3,891.70</td>
-                        <td>10,416.41</td>
-                        <td>323.42</td>
-                        <td>0.1737</td>
-                    </tr>
-                    <tr class="highlight-row">
-                        <td>Ensemble <span class="help-icon" title="Combination of all the models above">?</span></td>
-                        <td>3,879.43</td>
-                        <td>10,379.16</td>
-                        <td>327.31</td>
-                        <td>0.1903</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>MAE (hours) <span class="help-icon" title="Mean Absolute Error - average prediction error">?</span></th>
+                            <th>RMSE (hours) <span class="help-icon" title="Root Mean Square Error - emphasizes larger errors">?</span></th>
+                            <th>Median AE (hours) <span class="help-icon" title="Middle value of all errors - less affected by outliers">?</span></th>
+                            <th>R-squared <span class="help-icon" title="Proportion of variance explained (higher is better)">?</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tooltip">Random Forest<span class="tooltiptext"><span class="tooltip-title">Random Forest</span>A machine learning model that uses many decision trees together. Each tree votes on the prediction, and the majority wins. It's like asking many different people and taking the most common answer.</span></span></td>
+                            <td>3,878.43</td>
+                            <td>10,390.64</td>
+                            <td>322.83</td>
+                            <td>0.1825</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tooltip">Gradient Boosting<span class="tooltiptext"><span class="tooltip-title">Gradient Boosting</span>A machine learning technique that builds models sequentially, with each new model trying to correct the errors of previous models. It's like having each new team member focus specifically on the mistakes the team has been making.</span></span></td>
+                            <td>3,881.12</td>
+                            <td>10,339.36</td>
+                            <td>350.04</td>
+                            <td>0.1821</td>
+                        </tr>
+                        <tr>
+                            <td>XGBoost</td>
+                            <td>3,875.79</td>
+                            <td>10,321.36</td>
+                            <td>352.11</td>
+                            <td>0.1870</td>
+                        </tr>
+                        <tr>
+                            <td>GPU Forest <span class="help-icon" title="Random Forest variant optimized to run on graphics cards">?</span></td>
+                            <td>3,891.70</td>
+                            <td>10,416.41</td>
+                            <td>323.42</td>
+                            <td>0.1737</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>Ensemble <span class="help-icon" title="Combination of all the models above">?</span></td>
+                            <td>3,879.43</td>
+                            <td>10,379.16</td>
+                            <td>327.31</td>
+                            <td>0.1903</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <h3>Ensemble Model Relative Performance</h3>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>Base Model</th>
-                        <th>MAE Improvement (%) <span class="help-icon" title="Percentage improvement in Mean Absolute Error">?</span></th>
-                        <th>RMSE Improvement (%) <span class="help-icon" title="Percentage improvement in Root Mean Square Error">?</span></th>
-                        <th>Median AE Improvement (%) <span class="help-icon" title="Percentage improvement in Median Absolute Error">?</span></th>
-                        <th>R² Improvement (%) <span class="help-icon" title="Percentage improvement in R-squared">?</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Random Forest</td>
-                        <td class="negative">-0.09%</td>
-                        <td class="positive">0.11%</td>
-                        <td class="negative">-1.39%</td>
-                        <td class="positive">4.27%</td>
-                    </tr>
-                    <tr>
-                        <td>Gradient Boosting</td>
-                        <td class="positive">0.04%</td>
-                        <td class="negative">-0.38%</td>
-                        <td class="positive">6.49%</td>
-                        <td class="positive">4.50%</td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost</td>
-                        <td class="negative">-0.09%</td>
-                        <td class="negative">-0.56%</td>
-                        <td class="positive">7.04%</td>
-                        <td class="positive">1.78%</td>
-                    </tr>
-                    <tr>
-                        <td>GPU Forest</td>
-                        <td class="positive">0.32%</td>
-                        <td class="positive">0.36%</td>
-                        <td class="negative">-1.20%</td>
-                        <td class="positive">9.56%</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Base Model</th>
+                            <th>MAE Improvement (%) <span class="help-icon" title="Percentage improvement in Mean Absolute Error">?</span></th>
+                            <th>RMSE Improvement (%) <span class="help-icon" title="Percentage improvement in Root Mean Square Error">?</span></th>
+                            <th>Median AE Improvement (%) <span class="help-icon" title="Percentage improvement in Median Absolute Error">?</span></th>
+                            <th>R² Improvement (%) <span class="help-icon" title="Percentage improvement in R-squared">?</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Random Forest</td>
+                            <td class="negative">-0.09%</td>
+                            <td class="positive">0.11%</td>
+                            <td class="negative">-1.39%</td>
+                            <td class="positive">4.27%</td>
+                        </tr>
+                        <tr>
+                            <td>Gradient Boosting</td>
+                            <td class="positive">0.04%</td>
+                            <td class="negative">-0.38%</td>
+                            <td class="positive">6.49%</td>
+                            <td class="positive">4.50%</td>
+                        </tr>
+                        <tr>
+                            <td>XGBoost</td>
+                            <td class="negative">-0.09%</td>
+                            <td class="negative">-0.56%</td>
+                            <td class="positive">7.04%</td>
+                            <td class="positive">1.78%</td>
+                        </tr>
+                        <tr>
+                            <td>GPU Forest</td>
+                            <td class="positive">0.32%</td>
+                            <td class="positive">0.36%</td>
+                            <td class="negative">-1.20%</td>
+                            <td class="positive">9.56%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="key-insight">
                 <h3>Key Observations on Model Performance</h3>
@@ -943,94 +1014,98 @@
             <div class="grid-2">
                 <div class="chart-container">
                     <h3>Layer 1: Classification Performance</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Metric</th>
-                                <th>Without Embeddings</th>
-                                <th>With Embeddings</th>
-                                <th>Improvement</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Accuracy</td>
-                                <td>0.9638</td>
-                                <td>0.9653</td>
-                                <td class="positive">+0.0015</td>
-                            </tr>
-                            <tr>
-                                <td>Precision</td>
-                                <td>0.8675</td>
-                                <td>0.9552</td>
-                                <td class="positive">+0.0877</td>
-                            </tr>
-                            <tr>
-                                <td>Recall</td>
-                                <td>0.0710</td>
-                                <td>0.1041</td>
-                                <td class="positive">+0.0331</td>
-                            </tr>
-                            <tr>
-                                <td>F1 Score</td>
-                                <td>0.1313</td>
-                                <td>0.1878</td>
-                                <td class="positive">+0.0565</td>
-                            </tr>
-                            <tr>
-                                <td>AUC</td>
-                                <td>0.7875</td>
-                                <td>0.8542</td>
-                                <td class="positive">+0.0667</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Without Embeddings</th>
+                                    <th>With Embeddings</th>
+                                    <th>Improvement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Accuracy</td>
+                                    <td>0.9638</td>
+                                    <td>0.9653</td>
+                                    <td class="positive">+0.0015</td>
+                                </tr>
+                                <tr>
+                                    <td>Precision</td>
+                                    <td>0.8675</td>
+                                    <td>0.9552</td>
+                                    <td class="positive">+0.0877</td>
+                                </tr>
+                                <tr>
+                                    <td>Recall</td>
+                                    <td>0.0710</td>
+                                    <td>0.1041</td>
+                                    <td class="positive">+0.0331</td>
+                                </tr>
+                                <tr>
+                                    <td>F1 Score</td>
+                                    <td>0.1313</td>
+                                    <td>0.1878</td>
+                                    <td class="positive">+0.0565</td>
+                                </tr>
+                                <tr>
+                                    <td>AUC</td>
+                                    <td>0.7875</td>
+                                    <td>0.8542</td>
+                                    <td class="positive">+0.0667</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <div class="chart-container">
                     <h3>Layer 2: Regression Performance</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Best Model</th>
-                                <th>Without Embeddings</th>
-                                <th>With Embeddings</th>
-                                <th>Improvement</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>R² (XGBoost)</td>
-                                <td>0.1398</td>
-                                <td>0.1870</td>
-                                <td class="positive">+0.0472 (33.8%)</td>
-                            </tr>
-                            <tr>
-                                <td>R² (Ensemble)</td>
-                                <td>0.1459</td>
-                                <td>0.1903</td>
-                                <td class="positive">+0.0444 (30.4%)</td>
-                            </tr>
-                            <tr>
-                                <td>MAE (hours)</td>
-                                <td>3933.83</td>
-                                <td>3875.79</td>
-                                <td class="positive">-58.04 (1.5%)</td>
-                            </tr>
-                            <tr>
-                                <td>RMSE (hours)</td>
-                                <td>10483.27</td>
-                                <td>10321.36</td>
-                                <td class="positive">-161.91 (1.5%)</td>
-                            </tr>
-                            <tr>
-                                <td>Median AE (hours)</td>
-                                <td>329.33</td>
-                                <td>327.31</td>
-                                <td class="positive">-2.02 (0.6%)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Best Model</th>
+                                    <th>Without Embeddings</th>
+                                    <th>With Embeddings</th>
+                                    <th>Improvement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>R² (XGBoost)</td>
+                                    <td>0.1398</td>
+                                    <td>0.1870</td>
+                                    <td class="positive">+0.0472 (33.8%)</td>
+                                </tr>
+                                <tr>
+                                    <td>R² (Ensemble)</td>
+                                    <td>0.1459</td>
+                                    <td>0.1903</td>
+                                    <td class="positive">+0.0444 (30.4%)</td>
+                                </tr>
+                                <tr>
+                                    <td>MAE (hours)</td>
+                                    <td>3933.83</td>
+                                    <td>3875.79</td>
+                                    <td class="positive">-58.04 (1.5%)</td>
+                                </tr>
+                                <tr>
+                                    <td>RMSE (hours)</td>
+                                    <td>10483.27</td>
+                                    <td>10321.36</td>
+                                    <td class="positive">-161.91 (1.5%)</td>
+                                </tr>
+                                <tr>
+                                    <td>Median AE (hours)</td>
+                                    <td>329.33</td>
+                                    <td>327.31</td>
+                                    <td class="positive">-2.02 (0.6%)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             
@@ -1097,9 +1172,7 @@
                     <li><strong>Storage Optimization:</strong> Convert our NPZ embedding files to memory-mapped formats or high-performance databases that support vector operations</li>
                     <li><strong>Pre-computed Embeddings:</strong> Establish a pipeline to pre-compute and store reduced-dimension embeddings as part of the data preparation phase</li>
                 </ul>
-                <p>
-                    <em>Dev Note: We've already contacted several cloud providers about potential research partnerships for larger GPU resources. Initial benchmarking suggests 4-5x potential speedup on A100 clusters.</em>
-                </p>
+
             </div>
             
             <div class="recommendation">
@@ -1113,9 +1186,7 @@
                     <li><strong>Fast Mode:</strong> Add a development mode that uses smaller samples and only the fastest models for rapid iteration</li>
                     <li><strong>Modular Pipeline:</strong> Refactor the data flow to allow saving intermediate results, preventing redundant computation</li>
                 </ul>
-                <p>
-                    <em>Dev Note: Initial profiling shows embedding mapping consumes ~70% of processing time. We have a PR in review with batch processing improvements that should address this.</em>
-                </p>
+
             </div>
             
             <div class="recommendation">
@@ -1129,9 +1200,7 @@
                     <li><strong>Repository Context:</strong> Add repository-specific features by integrating with other GitHub data sources (commits, PRs, team structure)</li>
                     <li><strong>Hybrid Modeling:</strong> Investigate deep learning approaches that can directly use high-dimensional embeddings without PCA reduction</li>
                 </ul>
-                <p>
-                    <em>Dev Note: We've already prepared a benchmark dataset of 50 popular repositories to test these model enhancements systematically.</em>
-                </p>
+
             </div>
             
             <div class="recommendation">
@@ -1145,9 +1214,7 @@
                     <li><strong>Prediction Caching:</strong> Implement intelligent caching for common repositories and issue types</li>
                     <li><strong>Monitoring:</strong> Add drift detection and performance monitoring to track model effectiveness over time</li>
                 </ul>
-                <p>
-                    <em>Dev Note: We've started containerizing components with Docker to simplify deployment. Initial tests show ~200ms inference time for new issues once embeddings are generated.</em>
-                </p>
+
             </div>
             
             <div class="recommendation">
@@ -1161,9 +1228,7 @@
                     <li><strong>Project Management:</strong> Build integrations with JIRA, Linear, and other PM tools to provide resolution forecasts</li>
                     <li><strong>Developer Analytics:</strong> Create dashboards for project managers to identify bottlenecks and resource needs</li>
                 </ul>
-                <p>
-                    <em>Dev Note: We've already prototyped a GitHub Action that has received positive feedback from beta testers. This seems like the most promising initial integration.</em>
-                </p>
+
             </div>
         </div>
         
@@ -1229,15 +1294,47 @@
             "embedding": "A representation of discrete variables as vectors in a continuous vector space."
         };
 
-        // Make the help icons trigger tooltips for explanation
+        // Make both tooltips and help icons work with touch events
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle help icons
             const helpIcons = document.querySelectorAll('.help-icon');
             
+            // Track the current active tooltip
+            let activeTooltip = null;
+            
+            // Function to remove any active tooltip
+            function removeActiveTooltip() {
+                if (activeTooltip) {
+                    document.body.removeChild(activeTooltip.element);
+                    
+                    if (activeTooltip.source && activeTooltip.originalTitle) {
+                        activeTooltip.source.setAttribute('title', activeTooltip.originalTitle);
+                        activeTooltip.source.removeAttribute('data-original-title');
+                    }
+                    
+                    activeTooltip = null;
+                }
+            }
+            
+            // Close tooltip when clicking outside
+            document.addEventListener('touchstart', function(e) {
+                if (activeTooltip && activeTooltip.source !== e.target) {
+                    removeActiveTooltip();
+                }
+            });
+            
+            // Handle tooltips for help icons
             helpIcons.forEach(icon => {
-                icon.addEventListener('mouseover', function() {
-                    const title = this.getAttribute('title');
-                    this.setAttribute('data-original-title', title);
-                    this.removeAttribute('title');
+                // Function to show tooltip
+                function showTooltip(event) {
+                    event.preventDefault();
+                    
+                    // Remove any existing tooltip
+                    removeActiveTooltip();
+                    
+                    const title = icon.getAttribute('title');
+                    icon.setAttribute('data-original-title', title);
+                    icon.removeAttribute('title');
                     
                     const tooltip = document.createElement('div');
                     tooltip.className = 'tooltiptext';
@@ -1252,6 +1349,7 @@
                     tooltip.style.boxShadow = '0 3px 8px rgba(0,0,0,0.15)';
                     tooltip.style.zIndex = '1000';
                     tooltip.style.width = '250px';
+                    tooltip.style.maxWidth = '80vw';
                     tooltip.style.textAlign = 'left';
                     tooltip.style.fontSize = '0.9rem';
                     tooltip.style.lineHeight = '1.4';
@@ -1259,26 +1357,71 @@
                     
                     document.body.appendChild(tooltip);
                     
-                    const iconRect = this.getBoundingClientRect();
+                    const iconRect = icon.getBoundingClientRect();
                     const tooltipRect = tooltip.getBoundingClientRect();
+                    const viewportWidth = window.innerWidth;
+                    
+                    // Calculate horizontal position
+                    let leftPos = iconRect.left - (tooltipRect.width / 2) + (iconRect.width / 2);
+                    
+                    // Make sure tooltip doesn't go off the right edge
+                    if (leftPos + tooltipRect.width > viewportWidth - 10) {
+                        leftPos = viewportWidth - tooltipRect.width - 10;
+                    }
+                    
+                    // Make sure tooltip doesn't go off the left edge
+                    if (leftPos < 10) {
+                        leftPos = 10;
+                    }
                     
                     tooltip.style.top = (iconRect.top - tooltipRect.height - 10 + window.scrollY) + 'px';
-                    tooltip.style.left = (iconRect.left - tooltipRect.width / 2 + iconRect.width / 2) + 'px';
+                    tooltip.style.left = leftPos + 'px';
                     
-                    this._tooltip = tooltip;
-                });
+                    activeTooltip = {
+                        element: tooltip,
+                        source: icon,
+                        originalTitle: title
+                    };
+                }
+                
+                // Desktop - mouseover/mouseout
+                icon.addEventListener('mouseover', showTooltip);
                 
                 icon.addEventListener('mouseout', function() {
-                    if (this._tooltip) {
-                        document.body.removeChild(this._tooltip);
-                        this._tooltip = null;
+                    removeActiveTooltip();
+                });
+                
+                // Mobile - tap
+                icon.addEventListener('touchstart', showTooltip);
+            });
+            
+            // Handle regular tooltips
+            const tooltips = document.querySelectorAll('.tooltip');
+            
+            tooltips.forEach(tooltip => {
+                // Show tooltip when tapped on mobile
+                tooltip.addEventListener('touchstart', function(event) {
+                    event.stopPropagation();
+                    
+                    const tooltipText = this.querySelector('.tooltiptext');
+                    
+                    // If this tooltip is already active, hide it and exit
+                    if (activeTooltip && activeTooltip.element === tooltipText) {
+                        removeActiveTooltip();
+                        return;
                     }
                     
-                    const originalTitle = this.getAttribute('data-original-title');
-                    if (originalTitle) {
-                        this.setAttribute('title', originalTitle);
-                        this.removeAttribute('data-original-title');
-                    }
+                    // Remove any existing tooltip
+                    removeActiveTooltip();
+                    
+                    // Store this tooltip as active
+                    activeTooltip = {
+                        element: tooltipText,
+                        source: this
+                    };
+                    
+                    tooltipText.style.visibility = 'visible';
+                    tooltipText.style.opacity = '1';
                 });
             });
         });
