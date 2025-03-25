@@ -329,12 +329,13 @@
         }
         
         .feature-value {
+            -webkit-text-stroke: 1px black
             position: absolute;
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
             color: white;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
         }
         
@@ -889,7 +890,7 @@
             <p>The system consists of two main Python scripts:</p>
             
             <div class="highlight-box">
-                <h4>1. <code>04_predict_resolution_time.py</code></h4>
+                <h4>1. <code>predict_resolution_time.py</code></h4>
                 <p>This script implements the two-layer prediction system:</p>
                 <ul>
                     <li><strong>Data Loading and Preprocessing:</strong>
@@ -918,7 +919,7 @@
             </div>
             
             <div class="highlight-box">
-                <h4>2. <code>05_ensemble.py</code></h4>
+                <h4>2. <code>ensemble.py</code></h4>
                 <p>This script creates and evaluates ensemble models:</p>
                 <ul>
                     <li><strong>Ensemble Creation:</strong>
@@ -970,7 +971,7 @@
             </div>
             
             <h3>Critical Path Analysis</h3>
-            <p>The runtime summary shows:</p>
+            <p>Our runtime summary shows:</p>
             <ul>
                 <li>Without embeddings: 318.53 seconds (5.31 minutes)</li>
                 <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
