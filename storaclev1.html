@@ -340,10 +340,11 @@
             position: absolute;
             left: 10px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) translateX(100%);
             color: white;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 18px;
+            font-weight: 900;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         [data-theme="dark"] .feature-bar {
@@ -512,7 +513,7 @@
         <!-- System Overview Section -->
         <section id="overview">
             <h2>System Overview</h2>
-            <p>The GitHub Issue Resolution Time Prediction System uses a sophisticated two-layer approach to analyze and
+            <p>The GitHub Issue Resolution Time Prediction System uses a two-layer approach to analyze and
                 predict how long it will take to resolve GitHub issues.</p>
 
             <div class="highlight-box">
@@ -796,62 +797,97 @@
                         R² = R-squared coefficient of determination</small></p>
             </div>
 
-            <h3>Impact of Text Embeddings</h3>
             <div class="box">
-                <p>Adding <span class="tooltip">text embeddings<span class="tooltiptext">In natural language processing,
-                            a text embedding is a representation of a sentence as a vector of numbers which encodes
-                            meaningful semantic information. State of the art embeddings are based on the learned hidden
-                            layer representation of dedicated sentence transformer models. These vector representations
-                            allow machine learning models to understand the meaning behind issue descriptions, capturing
-                            nuances that simple word counts or character statistics miss.</span></span> significantly
-                    improved prediction performance:</p>
+                <p><strong>Analysis:</strong> The significant importance of classification uncertainty and text
+                    embeddings suggests that the <span class="tooltip">semantic content<span class="tooltiptext">The
+                            underlying meaning and context expressed in the issue text, beyond just keywords or
+                            surface-level statistics. This includes concepts like the problem domain, the complexity of
+                            the issue description, technical specificity, and how the issue is framed - all of which can
+                            influence how quickly it might be resolved.</span></span> of issues is valuable for
+                    predicting resolution time. The system effectively leverages this through the two-layer approach.
+                </p>
+            </div>
+
+            <h3>Resolution Time Distribution Challenge</h3>
+            <div class="warning-box">
+                <p><strong>Resolution Time Statistics:</strong></p>
                 <ul>
-                    <li>R² improved from 0.1459 to 0.1903 (30.4% increase)</li>
-                    <li>MAE decreased by 45.68 hours</li>
-                    <li>RMSE decreased by 107.03 hours</li>
+                    <li><strong>Mean:</strong> 3,404.38 hours (~142 days)</li>
+                    <li><strong>Median:</strong> 105.51 hours (~4.4 days)</li>
+                    <li><strong>Maximum:</strong> 148,492.47 hours (~17 years)</li>
+                    <li><strong>25th Percentile:</strong> 1.64 hours</li>
+                    <li><strong>75th Percentile:</strong> 1,752.48 hours (~73 days)</li>
+                    <li><strong>95th Percentile:</strong> 20,572.32 hours (~857 days)</li>
                 </ul>
-                <p>This suggests that the semantic content of issues contains valuable information for predicting
-                    resolution time.</p>
+                <p>The extreme disparity between mean (3,404 hours) and median (105.5 hours) resolution times reveals a
+                    highly skewed distribution with significant outliers. With some issues taking nearly 17 years to
+                    resolve while others are addressed within hours, the current model's modest R² value of 0.19 is
+                    unsurprising.</p>
+                <p>This extreme variability makes the current model appear ineffective for practical predictions.
+                    However, with additional data and features related to repository maintainers, issue authors, and
+                    codebase characteristics (such as complexity metrics, test coverage, and component dependencies), a
+                    significantly more powerful predictive model could be developed. Incorporating such contextual
+                    features would likely capture the organizational and technical factors that drive the wide variance
+                    in resolution times.</p>
+            </div>
+        </section>
+
+        <h3>Impact of Text Embeddings</h3>
+        <div class="box">
+            <p>Adding <span class="tooltip">text embeddings<span class="tooltiptext">In natural language processing,
+                        a text embedding is a representation of a sentence as a vector of numbers which encodes
+                        meaningful semantic information. State of the art embeddings are based on the learned hidden
+                        layer representation of dedicated sentence transformer models. These vector representations
+                        allow machine learning models to understand the meaning behind issue descriptions, capturing
+                        nuances that simple word counts or character statistics miss.</span></span> significantly
+                improved prediction performance:</p>
+            <ul>
+                <li>R² improved from 0.1459 to 0.1903 (30.4% increase)</li>
+                <li>MAE decreased by 45.68 hours</li>
+                <li>RMSE decreased by 107.03 hours</li>
+            </ul>
+            <p>This suggests that the semantic content of issues contains valuable information for predicting
+                resolution time.</p>
+        </div>
+
+        <h3>Error Analysis by Category</h3>
+        <div class="comparison-grid">
+            <div class="box">
+                <h4>By Author Type</h4>
+                <p>Issues from core contributors have:</p>
+                <ul>
+                    <li>Lower mean error (2873.02 vs. 3905.38 hours)</li>
+                    <li>Higher median error (415.46 vs. 324.82 hours)</li>
+                </ul>
+                <p><small>This suggests core contributor issues have fewer extreme outliers but may have moderate
+                        delays.</small></p>
             </div>
 
-            <h3>Error Analysis by Category</h3>
-            <div class="comparison-grid">
-                <div class="box">
-                    <h4>By Author Type</h4>
-                    <p>Issues from core contributors have:</p>
-                    <ul>
-                        <li>Lower mean error (2873.02 vs. 3905.38 hours)</li>
-                        <li>Higher median error (415.46 vs. 324.82 hours)</li>
-                    </ul>
-                    <p><small>This suggests core contributor issues have fewer extreme outliers but may have moderate
-                            delays.</small></p>
-                </div>
-
-                <div class="box">
-                    <h4>By Creation Time</h4>
-                    <p>Issues created on weekends have:</p>
-                    <ul>
-                        <li>Higher mean error (3970.00 vs. 3863.46 hours)</li>
-                        <li>Lower median error (310.12 vs. 330.43 hours)</li>
-                    </ul>
-                    <p><small>Weekend issues may be more unpredictable with extremes in resolution time.</small></p>
-                </div>
-
-                <div class="box">
-                    <h4>By Issue Content</h4>
-                    <p>Issues containing code have:</p>
-                    <ul>
-                        <li>Lower mean error (3839.15 vs. 3962.73 hours)</li>
-                        <li>Lower median error (319.51 vs. 343.41 hours)</li>
-                    </ul>
-                    <p><small>Code inclusion appears to make resolution time more predictable.</small></p>
-                </div>
+            <div class="box">
+                <h4>By Creation Time</h4>
+                <p>Issues created on weekends have:</p>
+                <ul>
+                    <li>Higher mean error (3970.00 vs. 3863.46 hours)</li>
+                    <li>Lower median error (310.12 vs. 330.43 hours)</li>
+                </ul>
+                <p><small>Weekend issues may be more unpredictable with extremes in resolution time.</small></p>
             </div>
 
-            <h3>Interpretation of Results</h3>
-            <p>While an R² of 0.19 may seem low, predicting GitHub issue resolution times is inherently challenging due
-                to many factors outside the scope of the data. The significant improvement when adding embeddings
-                indicates that the text content of issues provides valuable signals for prediction.</p>
+            <div class="box">
+                <h4>By Issue Content</h4>
+                <p>Issues containing code have:</p>
+                <ul>
+                    <li>Lower mean error (3839.15 vs. 3962.73 hours)</li>
+                    <li>Lower median error (319.51 vs. 343.41 hours)</li>
+                </ul>
+                <p><small>Code inclusion appears to make resolution time more predictable.</small></p>
+            </div>
+        </div>
+
+        <h3>Interpretation of Results</h3>
+        <p>While an R² of 0.19 may seem low, predicting GitHub issue resolution times is inherently challenging due
+            to many factors outside the scope of the data. The significant improvement when adding embeddings
+            indicates that the text content of issues provides valuable signals for prediction.</p>
         </section>
 
         <hr class="section-divider">
@@ -1449,199 +1485,200 @@
             <p>Incorporating these additional feature categories could substantially improve the model's predictive
                 power beyond the current R² of 0.19, potentially making the system more useful for practical project
                 planning and resource allocation.</p>
-    </section>
+        </section>
 
-    <hr class="section-divider">
+        <hr class="section-divider">
 
-    <!-- Architecture Section -->
-    <section id="architecture">
-        <h2>System Architecture Analysis</h2>
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <h2>System Architecture Analysis</h2>
 
-        <h3>Python Code Analysis</h3>
-        <p>The system consists of two main Python scripts:</p>
+            <h3>Python Code Analysis</h3>
+            <p>The system consists of two main Python scripts:</p>
 
-        <div class="highlight-box">
-            <h4>1. <code>predict_resolution_time.py</code></h4>
-            <p>This script implements the two-layer prediction system:</p>
-            <ul>
-                <li><strong>Data Loading and Preprocessing:</strong>
-                    <ul>
-                        <li>Loads repository data with issue details</li>
-                        <li>Applies regex-based deterministic classification</li>
-                        <li>Extracts features from creation time</li>
-                        <li>Loads and integrates text embeddings if available</li>
-                    </ul>
-                </li>
-                <li><strong>Classification Layer:</strong>
-                    <ul>
-                        <li>Trains a classifier (Random Forest, XGBoost, or GPU Forest)</li>
-                        <li>Applies classifier only to ambiguous issues</li>
-                        <li>Calculates classification uncertainty as a feature</li>
-                    </ul>
-                </li>
-                <li><strong>Regression Layer:</strong>
-                    <ul>
-                        <li>Trains multiple regression models (Random Forest, Gradient Boosting, XGBoost, GPU
-                            Forest)</li>
-                        <li>Evaluates and compares model performance</li>
-                        <li>Visualizes feature importance and errors</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="highlight-box">
-            <h4>2. <code>ensemble.py</code></h4>
-            <p>This script creates and evaluates ensemble models:</p>
-            <ul>
-                <li><strong>Ensemble Creation:</strong>
-                    <ul>
-                        <li>Loads trained models from the previous script</li>
-                        <li>Implements various ensemble methods (weighted, average, voting)</li>
-                        <li>Optionally optimizes weights for weighted ensemble</li>
-                    </ul>
-                </li>
-                <li><strong>Performance Analysis:</strong>
-                    <ul>
-                        <li>Compares ensemble to individual models</li>
-                        <li>Calculates improvement percentages</li>
-                        <li>Analyzes errors by issue category</li>
-                    </ul>
-                </li>
-                <li><strong>Feature Importance:</strong>
-                    <ul>
-                        <li>Calculates weighted feature importance across models</li>
-                        <li>Visualizes importance by feature and category</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <h3>Technical Implementation Details</h3>
-        <div class="comparison-grid">
-            <div class="box">
-                <h4>GPU Acceleration</h4>
-                <p>The system uses GPU acceleration through:</p>
+            <div class="highlight-box">
+                <h4>1. <code>predict_resolution_time.py</code></h4>
+                <p>This script implements the two-layer prediction system:</p>
                 <ul>
-                    <li><code>cuml</code> for GPU-based Random Forest</li>
-                    <li><code>cupy</code> for GPU array operations</li>
-                    <li>XGBoost with <code>tree_method='gpu_hist'</code></li>
+                    <li><strong>Data Loading and Preprocessing:</strong>
+                        <ul>
+                            <li>Loads repository data with issue details</li>
+                            <li>Applies regex-based deterministic classification</li>
+                            <li>Extracts features from creation time</li>
+                            <li>Loads and integrates text embeddings if available</li>
+                        </ul>
+                    </li>
+                    <li><strong>Classification Layer:</strong>
+                        <ul>
+                            <li>Trains a classifier (Random Forest, XGBoost, or GPU Forest)</li>
+                            <li>Applies classifier only to ambiguous issues</li>
+                            <li>Calculates classification uncertainty as a feature</li>
+                        </ul>
+                    </li>
+                    <li><strong>Regression Layer:</strong>
+                        <ul>
+                            <li>Trains multiple regression models (Random Forest, Gradient Boosting, XGBoost, GPU
+                                Forest)</li>
+                            <li>Evaluates and compares model performance</li>
+                            <li>Visualizes feature importance and errors</li>
+                        </ul>
+                    </li>
                 </ul>
-                <p><small>This provides significant speedup for large datasets.</small></p>
             </div>
 
-            <div class="box">
-                <h4>Error Handling</h4>
-                <p>The system implements robust error handling:</p>
+            <div class="highlight-box">
+                <h4>2. <code>ensemble.py</code></h4>
+                <p>This script creates and evaluates ensemble models:</p>
                 <ul>
-                    <li>Graceful fallback to CPU if GPU fails</li>
-                    <li>Handling missing features and values</li>
-                    <li>Data validation and cleaning</li>
+                    <li><strong>Ensemble Creation:</strong>
+                        <ul>
+                            <li>Loads trained models from the previous script</li>
+                            <li>Implements various ensemble methods (weighted, average, voting)</li>
+                            <li>Optionally optimizes weights for weighted ensemble</li>
+                        </ul>
+                    </li>
+                    <li><strong>Performance Analysis:</strong>
+                        <ul>
+                            <li>Compares ensemble to individual models</li>
+                            <li>Calculates improvement percentages</li>
+                            <li>Analyzes errors by issue category</li>
+                        </ul>
+                    </li>
+                    <li><strong>Feature Importance:</strong>
+                        <ul>
+                            <li>Calculates weighted feature importance across models</li>
+                            <li>Visualizes importance by feature and category</li>
+                        </ul>
+                    </li>
                 </ul>
-                <p><small>This ensures the pipeline can process diverse GitHub data reliably.</small></p>
             </div>
-        </div>
 
-        <h3>Critical Path Analysis</h3>
-        <p>Our runtime summary shows:</p>
-        <ul>
-            <li>Without embeddings: 318.53 seconds (5.31 minutes)</li>
-            <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
-        </ul>
-        <p>The significant increase in runtime with embeddings (14.4x slower) highlights the computational cost of
-            processing the additional 50 embedding dimensions for each issue.</p>
-    </section>
+            <h3>Technical Implementation Details</h3>
+            <div class="comparison-grid">
+                <div class="box">
+                    <h4>GPU Acceleration</h4>
+                    <p>The system uses GPU acceleration through:</p>
+                    <ul>
+                        <li><code>cuml</code> for GPU-based Random Forest</li>
+                        <li><code>cupy</code> for GPU array operations</li>
+                        <li>XGBoost with <code>tree_method='gpu_hist'</code></li>
+                    </ul>
+                    <p><small>This provides significant speedup for large datasets.</small></p>
+                </div>
 
-    <hr class="section-divider">
+                <div class="box">
+                    <h4>Error Handling</h4>
+                    <p>The system implements robust error handling:</p>
+                    <ul>
+                        <li>Graceful fallback to CPU if GPU fails</li>
+                        <li>Handling missing features and values</li>
+                        <li>Data validation and cleaning</li>
+                    </ul>
+                    <p><small>This ensures the pipeline can process diverse GitHub data reliably.</small></p>
+                </div>
+            </div>
 
-    <!-- Cloud Migration Section -->
-    <section id="cloud">
-        <h2>Cloud Migration Plan</h2>
-
-        <h3>Current Limitations</h3>
-        <p>The current system has several limitations that motivate a cloud migration:</p>
-        <ul>
-            <li>Processing time increases significantly with embeddings (14.4x slower)</li>
-            <li>Limited to the GitHub data currently available</li>
-            <li>Hardware constraints for large-scale processing</li>
-            <li>Class imbalance handling requires more sophisticated approaches</li>
-        </ul>
-
-        <div class="highlight-box">
-            <h3>Cloud Migration Benefits</h3>
+            <h3>Critical Path Analysis</h3>
+            <p>Our runtime summary shows:</p>
             <ul>
-                <li><strong>Scalability:</strong> Easily scale up compute resources for larger datasets</li>
-                <li><strong>Data Access:</strong> Process the comprehensive GitHub Archive data</li>
-                <li><strong>Parallel Processing:</strong> Distribute workloads across multiple nodes</li>
-                <li><strong>Cost Efficiency:</strong> Pay only for resources used during processing</li>
+                <li>Without embeddings: 318.53 seconds (5.31 minutes)</li>
+                <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
             </ul>
-        </div>
+            <p>The significant increase in runtime with embeddings (14.4x slower) highlights the computational cost of
+                processing the additional 50 embedding dimensions for each issue.</p>
+        </section>
 
-        <h3>GitHub Archive Integration</h3>
-        <p>The <a href="https://www.gharchive.org/" target="_blank">GitHub Archive</a> provides a comprehensive
-            record of GitHub events:</p>
-        <ul>
-            <li>Contains data since 2011 with hourly archives</li>
-            <li>Includes issue creation, updates, and closures</li>
-            <li>Provides rich metadata beyond what's in current dataset</li>
-            <li>Enables analysis of temporal patterns across the entire GitHub ecosystem</li>
-        </ul>
+        <hr class="section-divider">
 
-        <h3>Text Embedding Model Analysis</h3>
-        <div class="box">
-            <h4>HuggingFace Multilingual E5-Large-Instruct</h4>
-            <p>The system uses <span class="tooltip">intfloat/multilingual-e5-large-instruct<span class="tooltiptext">A
-                        state-of-the-art text embedding model from HuggingFace that converts
-                        text into high-dimensional vector representations. It's based on the E5 architecture (which
-                        stands for "Embeddings from bidirectional Encoder representations and contrastive predictive
-                        coding") and has been fine-tuned with instructions to better capture task-specific
-                        semantics. With 560M parameters, it offers a balance between quality and computational
-                        efficiency.</span></span> for generating embeddings.</p>
+        <!-- Cloud Migration Section -->
+        <section id="cloud">
+            <h2>Cloud Migration Plan</h2>
 
-            <h4>Advantages:</h4>
+            <h3>Current Limitations</h3>
+            <p>The current system has several limitations that motivate a cloud migration:</p>
             <ul>
-                <li><strong>Speed:</strong> Relatively fast inference compared to larger models</li>
-                <li><strong>Multilingual:</strong> Handles issues in different languages</li>
-                <li><strong>Instruction-tuned:</strong> Better at capturing task-specific semantics</li>
-                <li><strong>Reasonable Size:</strong> 560M parameters (vs. billions in larger models)</li>
+                <li>Processing time increases significantly with embeddings (14.4x slower)</li>
+                <li>Limited to the GitHub data currently available</li>
+                <li>Hardware constraints for large-scale processing</li>
+                <li>Class imbalance handling requires more sophisticated approaches</li>
             </ul>
 
-            <h4>Limitations:</h4>
-            <ul>
-                <li><strong>Quality Tradeoff:</strong> Not as high-quality as larger embedding models</li>
-                <li><strong>Technical Content:</strong> May not fully capture programming-specific semantics</li>
-                <li><strong>Context Length:</strong> Limited context window compared to newer models</li>
-            </ul>
-        </div>
+            <div class="highlight-box">
+                <h3>Cloud Migration Benefits</h3>
+                <ul>
+                    <li><strong>Scalability:</strong> Easily scale up compute resources for larger datasets</li>
+                    <li><strong>Data Access:</strong> Process the comprehensive GitHub Archive data</li>
+                    <li><strong>Parallel Processing:</strong> Distribute workloads across multiple nodes</li>
+                    <li><strong>Cost Efficiency:</strong> Pay only for resources used during processing</li>
+                </ul>
+            </div>
 
-        <h3>Cloud Implementation Roadmap</h3>
-        <ol>
-            <li><strong>Data Pipeline:</strong> Set up pipeline to ingest and process GitHub Archive data</li>
-            <li><strong>Distributed Processing:</strong> Refactor code for distributed execution (e.g., using Spark)
-            </li>
-            <li><strong>Embedding Service:</strong> Deploy embedding model as a scalable service</li>
-            <li><strong>GPU Instances:</strong> Use cloud GPU instances for model training</li>
-            <li><strong>Storage Optimization:</strong> Implement efficient storage of embeddings and features</li>
-            <li><strong>Class Imbalance Handling:</strong> Implement techniques like oversampling or cost-sensitive
-                learning</li>
-            <li><strong>Monitoring:</strong> Set up performance monitoring and alerting</li>
-        </ol>
-
-        <div class="box">
-            <h4>Trade-offs and Considerations</h4>
-            <p>When migrating to the cloud, several trade-offs need to be considered:</p>
+            <h3>GitHub Archive Integration</h3>
+            <p>The <a href="https://www.gharchive.org/" target="_blank">GitHub Archive</a> provides a comprehensive
+                record of GitHub events:</p>
             <ul>
-                <li><strong>Cost vs. Performance:</strong> More powerful instances cost more but reduce processing
-                    time</li>
-                <li><strong>Embedding Quality vs. Speed:</strong> Consider testing larger embedding models despite
-                    increased cost</li>
-                <li><strong>Data Volume vs. Detail:</strong> Balance between processing more repositories or deeper
-                    analysis</li>
-                <li><strong>Real-time vs. Batch Processing:</strong> Determine if predictions need to be real-time
-                    or batched</li>
+                <li>Contains data since 2011 with hourly archives</li>
+                <li>Includes issue creation, updates, and closures</li>
+                <li>Provides rich metadata beyond what's in current dataset</li>
+                <li>Enables analysis of temporal patterns across the entire GitHub ecosystem</li>
             </ul>
-        </div>
-    </section>
+
+            <h3>Text Embedding Model Analysis</h3>
+            <div class="box">
+                <h4>HuggingFace Multilingual E5-Large-Instruct</h4>
+                <p>The system uses <span class="tooltip">intfloat/multilingual-e5-large-instruct<span
+                            class="tooltiptext">A
+                            state-of-the-art text embedding model from HuggingFace that converts
+                            text into high-dimensional vector representations. It's based on the E5 architecture (which
+                            stands for "Embeddings from bidirectional Encoder representations and contrastive predictive
+                            coding") and has been fine-tuned with instructions to better capture task-specific
+                            semantics. With 560M parameters, it offers a balance between quality and computational
+                            efficiency.</span></span> for generating embeddings.</p>
+
+                <h4>Advantages:</h4>
+                <ul>
+                    <li><strong>Speed:</strong> Relatively fast inference compared to larger models</li>
+                    <li><strong>Multilingual:</strong> Handles issues in different languages</li>
+                    <li><strong>Instruction-tuned:</strong> Better at capturing task-specific semantics</li>
+                    <li><strong>Reasonable Size:</strong> 560M parameters (vs. billions in larger models)</li>
+                </ul>
+
+                <h4>Limitations:</h4>
+                <ul>
+                    <li><strong>Quality Tradeoff:</strong> Not as high-quality as larger embedding models</li>
+                    <li><strong>Technical Content:</strong> May not fully capture programming-specific semantics</li>
+                    <li><strong>Context Length:</strong> Limited context window compared to newer models</li>
+                </ul>
+            </div>
+
+            <h3>Cloud Implementation Roadmap</h3>
+            <ol>
+                <li><strong>Data Pipeline:</strong> Set up pipeline to ingest and process GitHub Archive data</li>
+                <li><strong>Distributed Processing:</strong> Refactor code for distributed execution (e.g., using Spark)
+                </li>
+                <li><strong>Embedding Service:</strong> Deploy embedding model as a scalable service</li>
+                <li><strong>GPU Instances:</strong> Use cloud GPU instances for model training</li>
+                <li><strong>Storage Optimization:</strong> Implement efficient storage of embeddings and features</li>
+                <li><strong>Class Imbalance Handling:</strong> Implement techniques like oversampling or cost-sensitive
+                    learning</li>
+                <li><strong>Monitoring:</strong> Set up performance monitoring and alerting</li>
+            </ol>
+
+            <div class="box">
+                <h4>Trade-offs and Considerations</h4>
+                <p>When migrating to the cloud, several trade-offs need to be considered:</p>
+                <ul>
+                    <li><strong>Cost vs. Performance:</strong> More powerful instances cost more but reduce processing
+                        time</li>
+                    <li><strong>Embedding Quality vs. Speed:</strong> Consider testing larger embedding models despite
+                        increased cost</li>
+                    <li><strong>Data Volume vs. Detail:</strong> Balance between processing more repositories or deeper
+                        analysis</li>
+                    <li><strong>Real-time vs. Batch Processing:</strong> Determine if predictions need to be real-time
+                        or batched</li>
+                </ul>
+            </div>
+        </section>
     </div>
 
     <a href="#" class="back-to-top" id="backToTop">↑</a>
