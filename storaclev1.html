@@ -338,18 +338,25 @@
         .feature-value {
             -webkit-text-stroke: 1px black;
             position: absolute;
-            left: 10px;
+            left: 10px; /* Adjusted for visibility */
             top: 50%;
-            transform: translateY(-50%) translateX(100%);
+            transform: translateY(-50%); /* Removed translateX(100%) */
             color: white;
-            font-size: 18px;
-            font-weight: 900;
+            font-size: 14px; /* Adjusted font size */
+            font-weight: bold; /* Adjusted font weight */
             font-family: Arial, Helvetica, sans-serif;
+            padding-left: 5px; /* Added padding for readability */
         }
+
 
         [data-theme="dark"] .feature-bar {
             background-color: var(--chart-color-2);
         }
+        [data-theme="dark"] .feature-value {
+            -webkit-text-stroke: 0.5px white; /* Adjusted for dark theme */
+            color: var(--bg-color); /* Ensure contrast */
+        }
+
 
         .feature-category-chart {
             display: flex;
@@ -484,7 +491,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>GitHub Issue Resolution Time Prediction System Analysis</h1>
+            <h1><span class="tooltip">GitHub Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> Resolution Time Prediction System Analysis</h1>
             <div class="theme-switch-wrapper">
                 <span class="theme-icon">☀️</span>
                 <label class="theme-switch" for="checkbox">
@@ -501,7 +508,7 @@
         <section>
             <h2>Contents</h2>
             <ol>
-                <li><a href="#overview">System Overview</a></li>
+                <li><a href="#overview">System Overview & Model Development</a></li>
                 <li><a href="#classification">Classification Performance</a></li>
                 <li><a href="#resolution">Resolution Time Prediction</a></li>
                 <li><a href="#features">Feature Analysis</a></li>
@@ -512,35 +519,35 @@
 
         <!-- System Overview Section -->
         <section id="overview">
-            <h2>System Overview</h2>
+            <h2>System Overview & Model Development</h2>
             <p>The GitHub Issue Resolution Time Prediction System uses a two-layer approach to analyze and
-                predict how long it will take to resolve GitHub issues.</p>
+                predict how long it will take to resolve <span class="tooltip">GitHub issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>.</p>
 
             <div class="highlight-box">
                 <h3>Two-Layer Prediction System</h3>
                 <ol>
                     <li>
-                        <strong>Classification Layer:</strong> Determines if issues are
+                        <strong>Classification Layer:</strong> Determines if <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> are
                         <span class="tooltip">valid<span class="tooltiptext">Issues that will be fixed or addressed by
                                 developers. These typically include actual bugs, feature requests, or enhancements that
                                 align with the project's roadmap.</span></span> or
                         <span class="tooltip">won't-fix<span class="tooltiptext">Issues that developers decide not to
                                 address. These may include duplicate reports, invalid bug reports, requests outside the
                                 project scope, or features that conflict with the project's design
-                                philosophy.</span></span>
+                                philosophy.</span></span>.
                     </li>
                     <li>
-                        <strong>Regression Layer:</strong> For valid issues, predicts
+                        <strong>Regression Layer:</strong> For valid <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>, predicts
                         <span class="tooltip">resolution time<span class="tooltiptext">The time duration (measured in
                                 hours) between when an issue is initially created and when it's finally closed. This
                                 metric is crucial for project planning and setting expectations with users about when
-                                their reported issues might be addressed.</span></span>
+                                their reported issues might be addressed.</span></span>.
                     </li>
                 </ol>
             </div>
 
             <h3>Classification Methods</h3>
-            <p>The system uses two approaches to classify issues:</p>
+            <p>The system uses two approaches to classify <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>:</p>
 
             <div class="comparison-grid">
                 <div class="box">
@@ -550,12 +557,11 @@
                                 expressions that search for specific text patterns using specialized syntax. In this
                                 context, they're used to identify keywords and phrases in issue labels that strongly
                                 indicate whether an issue will be fixed or not (e.g., "wontfix", "invalid", "bug",
-                                "enhancement").</span></span> to find keywords in issue
-                        <span class="tooltip">labels<span class="tooltiptext">Tags assigned to GitHub issues to
+                                "enhancement").</span></span> to find keywords in <span class="tooltip">issue labels<span class="tooltiptext">Tags assigned to GitHub issues to
                                 categorize them, such as "bug", "enhancement", "wontfix", "duplicate", etc. These labels
                                 are often manually applied by project maintainers and provide valuable signals about an
                                 issue's status and nature.</span></span> that clearly indicate
-                        if an issue is valid or won't-fix.
+                        if an <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> is valid or won't-fix.
                     </p>
                 </div>
 
@@ -578,14 +584,14 @@
                         <span class="tooltip">classifiers<span class="tooltiptext">Machine learning models designed to
                                 assign items into categories (classes). In this context, they decide whether an
                                 unlabeled or ambiguously labeled issue is likely to be fixed or not based on patterns
-                                learned from previously labeled issues.</span></span> to predict if the issue is valid
+                                learned from previously labeled issues.</span></span> to predict if the <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> is valid
                         or won't-fix.
                     </p>
                 </div>
             </div>
 
             <h3>Resolution Time Prediction</h3>
-            <p>For issues classified as valid, the system trains multiple machine learning models to predict resolution
+            <p>For <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> classified as valid, the system trains multiple machine learning models to predict resolution
                 time:</p>
 
             <ul>
@@ -613,6 +619,31 @@
                         aggregates the individual model predictions, reducing errors that might be made by any single
                         model and generally achieving better performance than any constituent model alone.</span></span>
                 combines the predictions from all models to achieve better accuracy than any individual model.</p>
+
+            <h3>Model Development Process</h3>
+            <p>The development of this prediction system involved several key stages in data handling and feature creation:</p>
+            <div class="box">
+                <h4>Data Acquisition and Storage:</h4>
+                <ul>
+                    <li><strong>Data Collection:</strong> Approximately 2 million <span class="tooltip">GitHub issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> were downloaded. These were sourced from the top 100 repositories across diverse and popular programming languages, including Python, Go, and Java, to ensure a broad and representative dataset.</li>
+                    <li><strong>Data Management:</strong> The collected <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> data was then systematically upserted into a PostgreSQL database. This relational database was chosen for its robustness and efficiency in handling large volumes of structured and semi-structured data, facilitating complex queries and data retrieval for model training.</li>
+                </ul>
+            </div>
+            <div class="box">
+                <h4>Feature Engineering:</h4>
+                <p>A crucial step was the engineering of a rich set of features from the raw <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> data. This process aimed to extract meaningful signals that could predict resolution times. Key feature categories include:</p>
+                <ul>
+                    <li><strong>Text Embeddings:</strong> Sophisticated text embeddings were generated for the title and body of each <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>. These embeddings convert textual information into dense vector representations, capturing the semantic meaning and context, which are vital for understanding the <span class="tooltip">issue's<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> content.</li>
+                    <li><strong>Numerical Features:</strong> A variety of numerical features were derived, such as:
+                        <ul>
+                            <li>The number of <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> concurrently open within the same repository at the time of an <span class="tooltip">issue's<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> creation (reflecting repository load).</li>
+                            <li>The total number of unique contributors to the repository (indicating community size and activity).</li>
+                        </ul>
+                    </li>
+                    <li>Additional features, as detailed in the <a href="#features">Feature Analysis</a> section (e.g., time-based features, content metadata), were also engineered to provide a comprehensive view of each <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>.</li>
+                </ul>
+            </div>
+            <p>This robust data foundation and meticulously engineered feature set form the basis for the two-layer prediction approach and the models subsequently trained and evaluated in this system.</p>
         </section>
 
         <hr class="section-divider">
@@ -624,7 +655,7 @@
             <h3>Dataset Distribution</h3>
             <div class="pie-chart-container">
                 <div>
-                    <h4 style="text-align: center;">Issue Distribution</h4>
+                    <h4 style="text-align: center;"><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> Distribution</h4>
                     <div class="pie-chart" id="issueDistributionChart"></div>
                     <div class="pie-chart-legend" id="issueDistributionLegend"></div>
                 </div>
@@ -639,10 +670,10 @@
                 <h3>Class Imbalance Challenge</h3>
                 <p>The dataset exhibits severe class imbalance:</p>
                 <ul>
-                    <li><strong>Valid Issues:</strong> 98.1% (550,487 issues)</li>
-                    <li><strong>Won't-fix Issues:</strong> 1.9% (10,562 issues)</li>
+                    <li><strong>Valid <span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>:</strong> 98.1% (550,487 <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>)</li>
+                    <li><strong>Won't-fix <span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>:</strong> 1.9% (10,562 <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>)</li>
                 </ul>
-                <p>This extreme imbalance makes it difficult for the model to correctly identify won't-fix issues,
+                <p>This extreme imbalance makes it difficult for the model to correctly identify won't-fix <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>,
                     resulting in low recall despite high accuracy.</p>
             </div>
 
@@ -678,17 +709,17 @@
 
             <h3>Performance Analysis</h3>
             <p>The high accuracy (96.5%) is misleading due to the class imbalance. The low recall (10.4%) indicates that
-                the model is missing about 90% of the actual won't-fix issues. This is a critical limitation of the
+                the model is missing about 90% of the actual won't-fix <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>. This is a critical limitation of the
                 current approach.</p>
 
             <div class="highlight-box">
                 <h4>Implications of Low Recall</h4>
-                <p>The poor recall for won't-fix issues means that:</p>
+                <p>The poor recall for won't-fix <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> means that:</p>
                 <ul>
-                    <li>Many won't-fix issues are incorrectly classified as valid</li>
-                    <li>The system will waste time predicting resolution times for issues that won't be fixed</li>
+                    <li>Many won't-fix <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> are incorrectly classified as valid</li>
+                    <li>The system will waste time predicting resolution times for <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> that won't be fixed</li>
                     <li>The resolution time predictions may be less accurate because the dataset includes mislabeled
-                        won't-fix issues</li>
+                        won't-fix <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
                 </ul>
             </div>
         </section>
@@ -803,7 +834,7 @@
                             underlying meaning and context expressed in the issue text, beyond just keywords or
                             surface-level statistics. This includes concepts like the problem domain, the complexity of
                             the issue description, technical specificity, and how the issue is framed - all of which can
-                            influence how quickly it might be resolved.</span></span> of issues is valuable for
+                            influence how quickly it might be resolved.</span></span> of <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> is valuable for
                     predicting resolution time. The system effectively leverages this through the two-layer approach.
                 </p>
             </div>
@@ -820,11 +851,11 @@
                     <li><strong>95th Percentile:</strong> 20,572.32 hours (~857 days)</li>
                 </ul>
                 <p>The extreme disparity between mean (3,404 hours) and median (105.5 hours) resolution times reveals a
-                    highly skewed distribution with significant outliers. With some issues taking nearly 17 years to
+                    highly skewed distribution with significant outliers. With some <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> taking nearly 17 years to
                     resolve while others are addressed within hours, the current model's modest R² value of 0.19 is
                     unsurprising.</p>
                 <p>This extreme variability makes the current model appear ineffective for practical predictions.
-                    However, with additional data and features related to repository maintainers, issue authors, and
+                    However, with additional data and features related to repository maintainers, <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> authors, and
                     codebase characteristics (such as complexity metrics, test coverage, and component dependencies), a
                     significantly more powerful predictive model could be developed. Incorporating such contextual
                     features would likely capture the organizational and technical factors that drive the wide variance
@@ -846,7 +877,7 @@
                 <li>MAE decreased by 45.68 hours</li>
                 <li>RMSE decreased by 107.03 hours</li>
             </ul>
-            <p>This suggests that the semantic content of issues contains valuable information for predicting
+            <p>This suggests that the semantic content of <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> contains valuable information for predicting
                 resolution time.</p>
         </div>
 
@@ -854,28 +885,28 @@
         <div class="comparison-grid">
             <div class="box">
                 <h4>By Author Type</h4>
-                <p>Issues from core contributors have:</p>
+                <p><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> from core contributors have:</p>
                 <ul>
                     <li>Lower mean error (2873.02 vs. 3905.38 hours)</li>
                     <li>Higher median error (415.46 vs. 324.82 hours)</li>
                 </ul>
-                <p><small>This suggests core contributor issues have fewer extreme outliers but may have moderate
+                <p><small>This suggests core contributor <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> have fewer extreme outliers but may have moderate
                         delays.</small></p>
             </div>
 
             <div class="box">
                 <h4>By Creation Time</h4>
-                <p>Issues created on weekends have:</p>
+                <p><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> created on weekends have:</p>
                 <ul>
                     <li>Higher mean error (3970.00 vs. 3863.46 hours)</li>
                     <li>Lower median error (310.12 vs. 330.43 hours)</li>
                 </ul>
-                <p><small>Weekend issues may be more unpredictable with extremes in resolution time.</small></p>
+                <p><small>Weekend <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> may be more unpredictable with extremes in resolution time.</small></p>
             </div>
 
             <div class="box">
-                <h4>By Issue Content</h4>
-                <p>Issues containing code have:</p>
+                <h4>By <span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> Content</h4>
+                <p><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> containing code have:</p>
                 <ul>
                     <li>Lower mean error (3839.15 vs. 3962.73 hours)</li>
                     <li>Lower median error (319.51 vs. 343.41 hours)</li>
@@ -885,9 +916,9 @@
         </div>
 
         <h3>Interpretation of Results</h3>
-        <p>While an R² of 0.19 may seem low, predicting GitHub issue resolution times is inherently challenging due
+        <p>While an R² of 0.19 may seem low, predicting <span class="tooltip">GitHub issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> resolution times is inherently challenging due
             to many factors outside the scope of the data. The significant improvement when adding embeddings
-            indicates that the text content of issues provides valuable signals for prediction.</p>
+            indicates that the text content of <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> provides valuable signals for prediction.</p>
         </section>
 
         <hr class="section-divider">
@@ -899,7 +930,7 @@
             <h3>Detailed Analysis of Top Predictive Features</h3>
             <div class="box">
                 <p>Understanding which features drive prediction performance provides valuable insights into what
-                    factors affect GitHub issue resolution times. This section expands on the visualizations above with
+                    factors affect <span class="tooltip">GitHub issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> resolution times. This section expands on the visualizations above with
                     detailed comparisons between models and feature sets.</p>
             </div>
 
@@ -923,7 +954,7 @@
                                         classification decision difficult, which often correlates with more complex or
                                         ambiguous issues.</span></span></td>
                             <td>25.58%</td>
-                            <td>The single most important predictor, suggesting that issues that are difficult to
+                            <td>The single most important predictor, suggesting that <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> that are difficult to
                                 classify tend to have less predictable resolution times.</td>
                         </tr>
                         <tr>
@@ -942,7 +973,7 @@
                                         issue, which can either help resolution (by providing more context) or indicate
                                         complexity.</span></span></td>
                             <td>5.18%</td>
-                            <td>Issues with longer descriptions may be more complex but also provide more context for
+                            <td><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> with longer descriptions may be more complex but also provide more context for
                                 resolution.</td>
                         </tr>
                         <tr>
@@ -952,7 +983,7 @@
                                         patterns (e.g., some languages use more characters per word than
                                         others).</span></span></td>
                             <td>4.47%</td>
-                            <td>Complements body_length; the two together suggest that issue verbosity is a strong
+                            <td>Complements body_length; the two together suggest that <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> verbosity is a strong
                                 signal.</td>
                         </tr>
                         <tr>
@@ -970,7 +1001,7 @@
                                         suggest the issue might be on the borderline, potentially affecting handling
                                         time even if it's ultimately addressed.</span></span></td>
                             <td>3.65%</td>
-                            <td>Issues with higher probability of being won't-fix (even if classified as valid) tend to
+                            <td><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> with higher probability of being won't-fix (even if classified as valid) tend to
                                 have distinctive resolution patterns.</td>
                         </tr>
                         <tr>
@@ -980,7 +1011,7 @@
                                         indicates more code examples or snippets relative to explanatory
                                         text.</span></span></td>
                             <td>3.62%</td>
-                            <td>Issues with more code relative to explanatory text may be more precisely defined.</td>
+                            <td><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> with more code relative to explanatory text may be more precisely defined.</td>
                         </tr>
                         <tr>
                             <td>8</td>
@@ -988,7 +1019,7 @@
                                         the issue description. Links often point to related issues, documentation, or
                                         external resources that provide context or prerequisites.</span></span></td>
                             <td>3.57%</td>
-                            <td>Issues that reference other resources may have dependencies or broader context affecting
+                            <td><span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> that reference other resources may have dependencies or broader context affecting
                                 resolution time.</td>
                         </tr>
                         <tr>
@@ -997,7 +1028,7 @@
                                         when the issue was created. This can indicate whether the issue was created
                                         during typical working hours or off-hours.</span></span></td>
                             <td>3.41%</td>
-                            <td>The time of day when issues are created correlates with resolution patterns, possibly
+                            <td>The time of day when <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> are created correlates with resolution patterns, possibly
                                 reflecting timezone differences or work schedules.</td>
                         </tr>
                         <tr>
@@ -1322,16 +1353,31 @@
             </div>
 
             <h3>Feature Category Analysis</h3>
+             <div class="feature-category-chart">
+                <div class="feature-category">
+                    <h4>Feature Categories (Without Embeddings)</h4>
+                    <div class="feature-pie" id="featureCategoryChart1"></div>
+                    <div class="pie-chart-legend" id="featureCategoryLegend1"></div>
+                    <p class="feature-category-total">Total Importance: 100%</p>
+                </div>
+                <div class="feature-category">
+                    <h4>Feature Categories (With Embeddings)</h4>
+                    <div class="feature-pie" id="featureCategoryChart2"></div>
+                    <div class="pie-chart-legend" id="featureCategoryLegend2"></div>
+                    <p class="feature-category-total">Total Importance: 100%</p>
+                </div>
+            </div>
+
 
             <div class="comparison-grid">
                 <div class="box">
                     <h4>Classification Layer Features</h4>
                     <p>Classification-related features provide critical signals:</p>
                     <ul>
-                        <li><strong>uncertainty</strong> - Issues with ambiguous classification signals tend to have
+                        <li><strong>uncertainty</strong> - <span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> with ambiguous classification signals tend to have
                             unpredictable resolution times</li>
                         <li><strong>wontfix_probability</strong> - Higher probabilities correlate with longer resolution
-                            times, even for issues ultimately classified as valid</li>
+                            times, even for <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> ultimately classified as valid</li>
                         <li>The decreasing importance of these features when embeddings are added suggests that
                             embedding dimensions capture some of the same semantic signals</li>
                         <li>XGBoost's extreme reliance on classification_uncertainty suggests it identifies subtle
@@ -1347,7 +1393,7 @@
                             resolution patterns</li>
                         <li><strong>created_day_of_month</strong> - Monthly cycles affect resolution (possibly due to
                             sprint patterns or release schedules)</li>
-                        <li><strong>created_hour</strong> - Issues created at different times of day show different
+                        <li><strong>created_hour</strong> - <span class="tooltip">Issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> created at different times of day show different
                             resolution patterns</li>
                         <li>Gradient Boosting places the highest importance on temporal features, particularly
                             created_year</li>
@@ -1360,9 +1406,9 @@
             <div class="comparison-grid">
                 <div class="box">
                     <h4>Content Features</h4>
-                    <p>Issue content characteristics provide strong signals:</p>
+                    <p><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> content characteristics provide strong signals:</p>
                     <ul>
-                        <li><strong>body_length/word_count</strong> - Longer issues likely involve more complex problems
+                        <li><strong>body_length/word_count</strong> - Longer <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> likely involve more complex problems
                         </li>
                         <li><strong>code_to_text_ratio</strong> - More code relative to explanation may indicate better
                             reproducibility</li>
@@ -1382,10 +1428,10 @@
                         <li>Collectively account for 63.2% of feature importance in the ensemble model</li>
                         <li>Embed_0, embed_5, and embed_2 are consistently the most important embedding dimensions
                             across models</li>
-                        <li>These embedding dimensions likely capture semantic aspects of issues like:</li>
+                        <li>These embedding dimensions likely capture semantic aspects of <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> like:</li>
                         <ul>
                             <li>Problem domain (UI, backend, database, etc.)</li>
-                            <li>Issue type (bug, feature request, documentation)</li>
+                            <li><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> type (bug, feature request, documentation)</li>
                             <li>Technical complexity signals</li>
                             <li>Writing style and clarity</li>
                         </ul>
@@ -1406,7 +1452,7 @@
                     <li><strong>Random Forest:</strong> Ranks it last at 22nd (0.31% importance)</li>
                     <li>This disagreement suggests the relationship between author status and resolution time is complex
                         and possibly non-linear</li>
-                    <li>XGBoost may be better at capturing specific resolution patterns for core contributor issues</li>
+                    <li>XGBoost may be better at capturing specific resolution patterns for core contributor <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
                 </ul>
             </div>
 
@@ -1420,9 +1466,9 @@
                         being considered valuable in bug reports</li>
                     <li><strong>has_code:</strong> Very low importance (typically below 0.6%) compared to
                         code_to_text_ratio (3.62% in ensemble)</li>
-                    <li>This suggests that the <em>quality</em> and <em>proportion</em> of code in an issue is more
+                    <li>This suggests that the <em>quality</em> and <em>proportion</em> of code in an <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> is more
                         important than its mere presence</li>
-                    <li>XGBoost appears more sensitive to specific technical indicators in the issue content</li>
+                    <li>XGBoost appears more sensitive to specific technical indicators in the <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> content</li>
                 </ul>
             </div>
 
@@ -1436,7 +1482,7 @@
                     <ul>
                         <li>Repository age and maturity</li>
                         <li>Number of active contributors</li>
-                        <li>Contributor-to-issue ratio</li>
+                        <li>Contributor-to-<span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> ratio</li>
                         <li>Release cadence and proximity to releases</li>
                         <li>Codebase size and complexity metrics</li>
                         <li>Test coverage and CI/CD pipeline metrics</li>
@@ -1444,14 +1490,14 @@
                 </div>
 
                 <div class="highlight-box">
-                    <h4>Issue Relationship Features</h4>
+                    <h4><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> Relationship Features</h4>
                     <ul>
-                        <li>Number of related or linked issues</li>
+                        <li>Number of related or linked <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
                         <li>Dependency graph metrics</li>
-                        <li>Issue priority relative to other open issues</li>
+                        <li><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> priority relative to other open <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
                         <li>Component popularity/activity level</li>
-                        <li>Historical resolution times for similar issues</li>
-                        <li>Issue "heat" (comments, reactions, subscriptions)</li>
+                        <li>Historical resolution times for similar <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
+                        <li><span class="tooltip">Issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> "heat" (comments, reactions, subscriptions)</li>
                     </ul>
                 </div>
             </div>
@@ -1472,10 +1518,10 @@
                 <div class="highlight-box">
                     <h4>Advanced Semantic Features</h4>
                     <ul>
-                        <li>Topic modeling of issue content</li>
+                        <li>Topic modeling of <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> content</li>
                         <li>Named entity recognition for technologies mentioned</li>
                         <li>Code-specific embeddings for technical content</li>
-                        <li>Sentiment analysis of issue descriptions</li>
+                        <li>Sentiment analysis of <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> descriptions</li>
                         <li>Complexity metrics for code snippets</li>
                         <li>Technical jargon density analysis</li>
                     </ul>
@@ -1502,7 +1548,7 @@
                 <ul>
                     <li><strong>Data Loading and Preprocessing:</strong>
                         <ul>
-                            <li>Loads repository data with issue details</li>
+                            <li>Loads repository data with <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> details</li>
                             <li>Applies regex-based deterministic classification</li>
                             <li>Extracts features from creation time</li>
                             <li>Loads and integrates text embeddings if available</li>
@@ -1511,7 +1557,7 @@
                     <li><strong>Classification Layer:</strong>
                         <ul>
                             <li>Trains a classifier (Random Forest, XGBoost, or GPU Forest)</li>
-                            <li>Applies classifier only to ambiguous issues</li>
+                            <li>Applies classifier only to ambiguous <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span></li>
                             <li>Calculates classification uncertainty as a feature</li>
                         </ul>
                     </li>
@@ -1541,7 +1587,7 @@
                         <ul>
                             <li>Compares ensemble to individual models</li>
                             <li>Calculates improvement percentages</li>
-                            <li>Analyzes errors by issue category</li>
+                            <li>Analyzes errors by <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> category</li>
                         </ul>
                     </li>
                     <li><strong>Feature Importance:</strong>
@@ -1585,7 +1631,7 @@
                 <li>With embeddings: 4598.77 seconds (76.65 minutes)</li>
             </ul>
             <p>The significant increase in runtime with embeddings (14.4x slower) highlights the computational cost of
-                processing the additional 50 embedding dimensions for each issue.</p>
+                processing the additional 50 embedding dimensions for each <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span>.</p>
         </section>
 
         <hr class="section-divider">
@@ -1618,7 +1664,7 @@
                 record of GitHub events:</p>
             <ul>
                 <li>Contains data since 2011 with hourly archives</li>
-                <li>Includes issue creation, updates, and closures</li>
+                <li>Includes <span class="tooltip">issue<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> creation, updates, and closures</li>
                 <li>Provides rich metadata beyond what's in current dataset</li>
                 <li>Enables analysis of temporal patterns across the entire GitHub ecosystem</li>
             </ul>
@@ -1638,7 +1684,7 @@
                 <h4>Advantages:</h4>
                 <ul>
                     <li><strong>Speed:</strong> Relatively fast inference compared to larger models</li>
-                    <li><strong>Multilingual:</strong> Handles issues in different languages</li>
+                    <li><strong>Multilingual:</strong> Handles <span class="tooltip">issues<span class="tooltiptext">A GitHub Issue is a way to track tasks, enhancements, bugs, or other items of work within a GitHub repository. It serves as a discussion forum and progress tracker for specific topics.</span></span> in different languages</li>
                     <li><strong>Instruction-tuned:</strong> Better at capturing task-specific semantics</li>
                     <li><strong>Reasonable Size:</strong> 560M parameters (vs. billions in larger models)</li>
                 </ul>
@@ -1736,6 +1782,10 @@
         // Pie charts
         function createPieChart(elementId, data, legendId) {
             const container = document.getElementById(elementId);
+            if (!container) {
+                console.error("Pie chart container not found:", elementId);
+                return;
+            }
             container.innerHTML = ''; // Clear existing content
 
             const canvas = document.createElement('canvas');
@@ -1750,6 +1800,10 @@
 
             let startAngle = 0;
             const legendContainer = document.getElementById(legendId);
+             if (!legendContainer) {
+                console.error("Pie chart legend container not found:", legendId);
+                return;
+            }
             legendContainer.innerHTML = ''; // Clear existing legend
 
             // Get current theme colors
@@ -1767,8 +1821,8 @@
 
                 // Generate color based on theme
                 const colors = isThemeDark
-                    ? ['#4a9de7', '#84bee9', '#2ecc71', '#f39c12', '#e67e22']
-                    : ['#0a4a82', '#2980b9', '#27ae60', '#f1c40f', '#e67e22'];
+                    ? ['#4a9de7', '#84bee9', '#2ecc71', '#f39c12', '#e67e22', '#9b59b6']
+                    : ['#0a4a82', '#2980b9', '#27ae60', '#f1c40f', '#e67e22', '#8e44ad'];
 
                 const color = colors[index % colors.length];
 
